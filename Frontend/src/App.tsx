@@ -1,8 +1,11 @@
 import React from "react";
-
+import { Routes, Route } from "react-router-dom";
+import IndexPage from "./pages/IndexPage.tsx";
 const App = () => {
   return (
-    <h1 className="text-3xl font-bold underline">Hello World</h1>
+    <Routes>
+      <Route path="/" element={<IndexPage />} />
+    </Routes>
   )
 }
 
