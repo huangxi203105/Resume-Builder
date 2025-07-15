@@ -1,2 +1,19 @@
 @import "tailwindcss";
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer components {
+  .hover-shadow-purple:hover {
+    box-shadow: 0 25px 50px -12px #9358ff;
+  }
+
+  .hover-shadow-pink:hover {
+    box-shadow: 0 25px 50px -12px #f046e4;
+  }
+
+  .hover-shadow-orange:hover {
+    box-shadow: 0 25px 50px -12px #f76001;
+  }
+}

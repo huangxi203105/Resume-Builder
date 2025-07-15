@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import {landingPageStyles} from "../assets/dummystyle.js";
-import { statsMap,cardsMap } from "../model/index.ts";
+import { landingPageStyles } from "../assets/dummystyle.js";
+import { statsMap, cardsMap } from "../model/index.ts";
+import Modal from "../components/Modal";
 import Card from "../components/Card"
 AOS.init({
   offset: 120,       // 触发距离（像素）
@@ -12,18 +13,25 @@ AOS.init({
   once: false,        // 是否只触发一次
   mirror: true,     // 滚动回来时是否反向播放
 });
-
 const IndexPage = () => {
+  const modalRef: any = useRef(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  }
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
       <div className="z-20 header">
-        <header className="w-full fixed top-0 bg-[#fcfefe] text-black py-4 px-110 flex justify-between">
+        <header className="w-full fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-violet-100/50 py-4 px-110 flex justify-between">
           <div className="flex items-center gap-2">
             <div className="w-[30px] h-[30px] bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-[12px] shadow-md"></div>
             <div className="text-xl font-semibold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">ResumeXpert</div>
           </div>
           <div>
-            <button className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
+            <button onClick={showModal} className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
               <span className="text-white font-semibold">Get Started</span>
             </button>
           </div>
@@ -47,7 +55,7 @@ const IndexPage = () => {
             <div className="flex gap-4">
               {
                 statsMap.map((stat, index) => (
-                  <div key={index} className="flex flex-col gap-2 text-center">
+                  <div data-aos="fade-up" data-aos-delay={`${index * 100 + 200}`} key={index} className="flex flex-col gap-2 text-center">
                     <div className={`text-2xl lg:text-4xl font-black bg-gradient-to-r bg-clip-text text-transparent ${stat.gradient}`}>{stat.value}</div>
                     <div className="text-xs text-slate-500 font-medium">{stat.label}</div>
                   </div>
@@ -128,13 +136,13 @@ const IndexPage = () => {
         </section>
         <section className="flex gap-4 flex-col mt-[120px]">
           <div className="flex w-full justify-center items-center gap-2">
-            <div data-aos="fade-up" data-aos-delay="200" className="text-4xl font-bold">Why Choose</div>
-            <div data-aos="fade-up" data-aos-delay="200" className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">ResumeXpert?</div>
+            <div data-aos="fade-up" data-aos-delay="200" className="text-5xl font-bold">Why Choose</div>
+            <div data-aos="fade-up" data-aos-delay="200" className="text-5xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">ResumeXpert?</div>
           </div>
           <div className="flex w-full justify-center items-center">
             <div data-aos="fade-up" data-aos-delay="300" className="text-normal text-[#878ca4]">Everything you need to create a professional resume that stands out</div>
           </div>
-          <div className="flex w-full justify-between items-center">
+          <div className="flex flex-col w-full justify-between items-center">
             <div data-aos="fade-up" data-aos-delay="400" className="w-full flex justify-between">
               {
                 cardsMap.map((card, index) => (
@@ -148,6 +156,24 @@ const IndexPage = () => {
                 ))
               }
             </div>
+            <div className="mt-[150px]">
+              <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col gap-4 justify-center bg-[#fefcfe] p-8 rounded-2xl shadow-lg shadow-violet-200">
+                <div className="flex w-[700px] justify-center items-center gap-2">
+                  <span className="text-5xl font-bold">Ready To Build Your <span className="text-5xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Standout Resume?</span> </span>
+                  {/* <div data-aos="fade-up" data-aos-delay="200" className="text-5xl font-bold">Ready To Build Your </div>
+                  <div data-aos="fade-up" data-aos-delay="200" className="text-5xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Standout Resume?</div> */}
+                </div>
+                <div className="flex w-full justify-center items-center">
+                  <div data-aos="fade-up" data-aos-delay="300" className="text-normal text-[#878ca4]">join thousands of professionals who landed their dream jobs with our platform</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400" className="w-full flex justify-center items-center">
+                  <button className="w-[250px] cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-5 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200 hover:bg-gradient-to-r hover:from-[#d621de] hover:to-[#f7702b]">
+                    <span className="text-white font-semibold">Start Building Now!</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <Modal isOpen={isModalOpen} onClose={handleModalClose} ref={modalRef} />
           </div>
         </section>
       </div>

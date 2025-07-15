@@ -22,20 +22,19 @@ export const cardsMap: CardProps[] = [
   {
     title: 'Lightning Fast',
     description: 'Create a professional resume in minutes with our easy-to-use resume builder.',
-    iconColor: 'bg-[#9358ff]',
+    iconColor: '#9358ff',
     bgColor: 'bg-[#f5f5fe]',
   },
   {
     title: 'Pro Templates',
     description: 'Choose from dozens of recruiter-approved,industry-specific templates.',
-    iconColor: 'bg-[#f046e4]',
+    iconColor: '#f046e4',
     bgColor: 'bg-[#fef4fd]',
   },
   {
     title: 'Instant Export',
     description: 'Download your resume in PDF format with just one click.',
-    iconColor: 'bg-[#f76001]',
+    iconColor: '#f76001',
     bgColor: 'bg-[#fef6ee]',
   },
- 
 ]
