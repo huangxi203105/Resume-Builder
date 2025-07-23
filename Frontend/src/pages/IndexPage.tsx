@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { landingPageStyles } from "../assets/dummystyle.js";
 import { statsMap, cardsMap } from "../model/index.ts";
 import Modal from "../components/Modal";
 import Card from "../components/Card"
+import { UserContext } from "../context/UserContext";
 AOS.init({
   offset: 120,       // 触发距离（像素）
   delay: 100,        // 延迟（毫秒）
@@ -16,11 +17,15 @@ AOS.init({
 const IndexPage = () => {
   const modalRef: any = useRef(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const userContext = useContext(UserContext)
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
+  }
+  const logout = () =>{
+    userContext?.clearUser()
   }
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
@@ -31,9 +36,21 @@ const IndexPage = () => {
             <div className="text-xl font-semibold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">ResumeXpert</div>
           </div>
           <div>
-            <button onClick={showModal} className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
-              <span className="text-white font-semibold">Get Started</span>
-            </button>
+            {userContext?.user ? (
+                <div className="flex items-center gap-2 p-3 rounded-[15px] bg-[#f2f2f2]">
+                  <div className="flex items-center justify-center rounded-[8px] w-[30px] h-[30px] p-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold">
+                    <div>{userContext.user.name.charAt(0)}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-sm font-bold">{userContext.user.name}</div>
+                    <div onClick={logout} className="text-xs font-medium text-violet-600 cursor-pointer">Logout</div>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={showModal} className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
+                  <span className="text-white font-semibold">Get Started</span>
+                </button>
+            )}
           </div>
         </header>
       </div>

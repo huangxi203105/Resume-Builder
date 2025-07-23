@@ -1,14 +1,21 @@
-import React, { useState, forwardRef, useImperativeHandle, useCallback, useEffect } from 'react'
+import React, { useState, forwardRef, useImperativeHandle, useCallback, useEffect, use } from 'react'
 import ReactDOM from 'react-dom';
 import Input from './Input'
 import "../assets/Modal.css"
+import { LoginForm } from './LoginForm';
+import { RegisterForm } from './RegisterForm';
 interface ModalProps {
   isOpen: Boolean,
   onClose: () => void
   children?: React.ReactNode
   disableScroll?: Boolean,
+  initialView?: "login" | "register"
 }
-const Modal = forwardRef(({ isOpen, onClose, disableScroll = true }: ModalProps, ref) => {
+const Modal = forwardRef(({ isOpen, onClose, disableScroll = true,initialView="login" }: ModalProps, ref) => {
+  const [view, setView] = useState(initialView)
+  const switchView = (view:any) =>{
+    setView(view)
+  }
   const handleKeyDown = useCallback((e: any) => {
     if (e.key === 'Escape') {
       onClose();
@@ -38,11 +45,13 @@ const Modal = forwardRef(({ isOpen, onClose, disableScroll = true }: ModalProps,
 
   // 点击遮罩层关闭
   const handleOverlayClick = (e: any) => {
-    console.log(e.target, e.currentTarget)
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
+  useImperativeHandle(ref, () => ({
+    switchView: (view: any) =>setView(view)
+  }))
 
   if (!isOpen) return null;
   return ReactDOM.createPortal(
@@ -53,19 +62,11 @@ const Modal = forwardRef(({ isOpen, onClose, disableScroll = true }: ModalProps,
         <div className='absolute top-[20px] right-[20px]'>
           <button onClick={onClose} className='bg-red-300 text-red-500 w-[30px] h-[30px] rounded-[5px] shadow-lg shadow'>X</button>
         </div>
-        <div className='text-2xl font-bold flex justify-center'>Welcome Back</div>
-        <div className="flex w-full justify-center text-normal text-[#878ca4]">
-          sign in to continue building amazing resumes
-        </div>
-        <div className='mt-[20px]'>
-          <Input type='email' label='Email Address' />
-          <Input type='password' label='Password' />
-        </div>
-        <div className='w-full flex justify-center'>
-          <button className='w-full cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-4 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200'>
-            <span className='text-white font-semibold'>Sign In</span>
-          </button>
-        </div>
+        {view === 'login' ? (
+          <LoginForm onSwitchView={() => switchView('register')} />
+        ) : (
+          <RegisterForm onSwitchView={() => switchView('login')} />
+        )}
       </div>
     </div>
     ,
