@@ -184,7 +184,7 @@ const IndexPage = () => {
                   <div data-aos="fade-up" data-aos-delay="300" className="text-normal text-[#878ca4]">join thousands of professionals who landed their dream jobs with our platform</div>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="400" className="w-full flex justify-center items-center">
-                  <button className="w-[250px] cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-5 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200 hover:bg-gradient-to-r hover:from-[#d621de] hover:to-[#f7702b]">
+                  <button onClick={} className="w-[250px] cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-5 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200 hover:bg-gradient-to-r hover:from-[#d621de] hover:to-[#f7702b]">
                     <span className="text-white font-semibold">Start Building Now!</span>
                   </button>
                 </div>
