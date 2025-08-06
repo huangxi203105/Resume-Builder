@@ -1,6 +1,7 @@
 // src/utils/http.js
 import axios from 'axios';
 import { BASE_URL } from './apiPath';
+import { navigateTo } from './navigation';
 // 创建 Axios 实例
 const http = axios.create({
   baseURL: BASE_URL, // 替换为您的 API 基础 URL
@@ -34,7 +35,7 @@ http.interceptors.response.use(
   (response) => {
     // 统一处理响应数据
     if (response.status === 200) {
-      return Promise.resolve(response.data) ;
+      return Promise.resolve(response.data);
     }
 
     return response;
@@ -48,7 +49,7 @@ http.interceptors.response.use(
       switch (status) {
         case 401:
           console.error('未授权，请重新登录');
-          window.location.href = '/';
+          navigateTo('/');
           break;
         case 403:
           console.error('拒绝访问');
@@ -76,7 +77,7 @@ http.interceptors.response.use(
 
 // 封装常用请求方法
 export default {
-  get: (url:any, params?:any, config?:any) => http.get(url, { params, ...config }),
+  get: (url: any, params?: any, config?: any) => http.get(url, { params, ...config }),
   post: (url: any, data?: any, config?: any) => http.post(url, data, config),
   // put: (url: any, data: any, config: any) => http.put(url, data, config),
   // delete: (url: any ,config: any) => http.delete(url, config),

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Input from "./Input"
 import http from "../utils/http"
 import API_PATH from "../utils/apiPath"
@@ -8,19 +9,21 @@ interface LoginFormProps {
 }
 
 export const LoginForm = (props: LoginFormProps) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const userContext = useContext(UserContext)
+
   const login = async () => {
     try {
       const res = await http.post(API_PATH.LOGIN, { email, password })
-      console.log(res)
       localStorage.setItem('token', res.data.token)
       // 更新用户状态
       if (userContext && userContext.setUser) {
         userContext.setUser(res.data)
+        navigate('/resume/new');
+        return;
       }
-      window.location.href = '/'
     } catch (err) {
       console.log(err)
     }

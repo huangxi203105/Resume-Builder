@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { landingPageStyles } from "../assets/dummystyle.js";
@@ -15,17 +16,29 @@ AOS.init({
   mirror: true,     // 滚动回来时是否反向播放
 });
 const IndexPage = () => {
+  const navigate = useNavigate();
   const modalRef: any = useRef(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const userContext = useContext(UserContext)
+
   const showModal = () => {
     setIsModalOpen(true);
   };
+
   const handleModalClose = () => {
     setIsModalOpen(false);
   }
-  const logout = () =>{
+
+  const logout = () => {
     userContext?.clearUser()
+  }
+
+  const ToResumePage = () => {
+    if (userContext?.user) {
+      navigate('/resume/new');
+    } else {
+      showModal()
+    }
   }
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
@@ -37,19 +50,19 @@ const IndexPage = () => {
           </div>
           <div>
             {userContext?.user ? (
-                <div className="flex items-center gap-2 p-3 rounded-[15px] bg-[#f2f2f2]">
-                  <div className="flex items-center justify-center rounded-[8px] w-[30px] h-[30px] p-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold">
-                    <div>{userContext.user.name.charAt(0)}</div>
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="text-sm font-bold">{userContext.user.name}</div>
-                    <div onClick={logout} className="text-xs font-medium text-violet-600 cursor-pointer">Logout</div>
-                  </div>
+              <div className="flex items-center gap-2 p-3 rounded-[15px] bg-[#f2f2f2]">
+                <div className="flex items-center justify-center rounded-[8px] w-[30px] h-[30px] p-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold">
+                  <div>{userContext.user.name.charAt(0)}</div>
                 </div>
-              ) : (
-                <button onClick={showModal} className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
-                  <span className="text-white font-semibold">Get Started</span>
-                </button>
+                <div className="flex flex-col">
+                  <div className="text-sm font-bold">{userContext.user.name}</div>
+                  <div onClick={logout} className="text-xs font-medium text-violet-600 cursor-pointer">Logout</div>
+                </div>
+              </div>
+            ) : (
+              <button onClick={showModal} className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-2 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200">
+                <span className="text-white font-semibold">Get Started</span>
+              </button>
             )}
           </div>
         </header>
@@ -184,7 +197,7 @@ const IndexPage = () => {
                   <div data-aos="fade-up" data-aos-delay="300" className="text-normal text-[#878ca4]">join thousands of professionals who landed their dream jobs with our platform</div>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="400" className="w-full flex justify-center items-center">
-                  <button onClick={} className="w-[250px] cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-5 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200 hover:bg-gradient-to-r hover:from-[#d621de] hover:to-[#f7702b]">
+                  <button onClick={ToResumePage} className="w-[250px] cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white py-5 px-4 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-violet-200 hover:bg-gradient-to-r hover:from-[#d621de] hover:to-[#f7702b]">
                     <span className="text-white font-semibold">Start Building Now!</span>
                   </button>
                 </div>

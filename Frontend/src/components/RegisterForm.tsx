@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Input from "./Input"
 import http from "../utils/http"
 import API_PATH from "../utils/apiPath"
@@ -6,15 +7,17 @@ interface RegisterFormProps {
   onSwitchView: () => void
 }
 export const RegisterForm = (props: RegisterFormProps) => {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+
   const register = async () => {
     try {
       const res = await http.post(API_PATH.REGISTER, { fullName, email, password })
       console.log(res)
       localStorage.setItem('token', res.data.token)
-      window.location.href = '/'
+      navigate('/');
     } catch (err) {
       console.log(err)
     }
@@ -23,7 +26,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
     <div>
       <div className='text-2xl font-bold flex justify-center'>Sign UP</div>
       <div className="flex w-full justify-center text-normal text-[#878ca4]">
-          By signing up, you agree to our
+        By signing up, you agree to our
       </div>
       <div className='mt-[20px]'>
         <Input value={fullName} onChange={(e) => setFullName(e.target.value)} type='text' label='Full Name' />
