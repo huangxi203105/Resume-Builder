@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../../../context/FormContext';
 
 export default function EducationStep() {
   const { state, updateFormData } = useFormContext();
@@ -23,7 +23,7 @@ export default function EducationStep() {
   };
 
   const updateEducation = (index: number, field: string, value: string) => {
-    const updatedEducation = formData.education.map((edu, i) => 
+    const updatedEducation = formData.education.map((edu, i) =>
       i === index ? { ...edu, [field]: value } : edu
     );
     updateFormData({ education: updatedEducation });

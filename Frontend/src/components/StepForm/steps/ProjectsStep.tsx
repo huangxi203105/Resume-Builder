@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../../../context/FormContext';
 
 export default function ProjectsStep() {
   const { state, updateFormData } = useFormContext();
@@ -23,7 +23,7 @@ export default function ProjectsStep() {
   };
 
   const updateProject = (index: number, field: string, value: string) => {
-    const updatedProjects = formData.projects.map((project, i) => 
+    const updatedProjects = formData.projects.map((project, i) =>
       i === index ? { ...project, [field]: value } : project
     );
     updateFormData({ projects: updatedProjects });
@@ -45,7 +45,7 @@ export default function ProjectsStep() {
   };
 
   const updateAchievement = (index: number, field: string, value: string) => {
-    const updatedAchievements = formData.achievements.map((achievement, i) => 
+    const updatedAchievements = formData.achievements.map((achievement, i) =>
       i === index ? { ...achievement, [field]: value } : achievement
     );
     updateFormData({ achievements: updatedAchievements });
@@ -68,7 +68,7 @@ export default function ProjectsStep() {
   };
 
   const updateCertification = (index: number, field: string, value: string) => {
-    const updatedCertifications = formData.certifications.map((cert, i) => 
+    const updatedCertifications = formData.certifications.map((cert, i) =>
       i === index ? { ...cert, [field]: value } : cert
     );
     updateFormData({ certifications: updatedCertifications });
@@ -84,7 +84,7 @@ export default function ProjectsStep() {
       {/* 项目经验 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">项目作品</h3>
-        
+
         <div className="space-y-6">
           {formData.projects.map((project, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-6 relative">
@@ -174,7 +174,7 @@ export default function ProjectsStep() {
       {/* 成就奖项 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">成就奖项</h3>
-        
+
         <div className="space-y-4">
           {formData.achievements.map((achievement, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 relative">
@@ -200,7 +200,7 @@ export default function ProjectsStep() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     描述
@@ -232,7 +232,7 @@ export default function ProjectsStep() {
       {/* 证书认证 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">证书认证</h3>
-        
+
         <div className="space-y-4">
           {formData.certifications.map((certification, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 relative">
@@ -258,7 +258,7 @@ export default function ProjectsStep() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     颁发机构

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../../../context/FormContext';
 
 export default function ProfileStep() {
   const { state, updateFormData } = useFormContext();
@@ -91,9 +91,9 @@ export default function ProfileStep() {
         <div className="flex items-center space-x-4">
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
             {formData.profileInfo.profilePreviewUrl ? (
-              <img 
-                src={formData.profileInfo.profilePreviewUrl} 
-                alt="头像预览" 
+              <img
+                src={formData.profileInfo.profilePreviewUrl}
+                alt="头像预览"
                 className="w-full h-full object-cover"
               />
             ) : (

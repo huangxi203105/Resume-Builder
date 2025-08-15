@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../../../context/FormContext';
 
 export default function SkillsStep() {
   const { state, updateFormData } = useFormContext();
@@ -21,7 +21,7 @@ export default function SkillsStep() {
   };
 
   const updateSkill = (index: number, field: string, value: string | number) => {
-    const updatedSkills = formData.skills.map((skill, i) => 
+    const updatedSkills = formData.skills.map((skill, i) =>
       i === index ? { ...skill, [field]: value } : skill
     );
     updateFormData({ skills: updatedSkills });
@@ -43,7 +43,7 @@ export default function SkillsStep() {
   };
 
   const updateLanguage = (index: number, field: string, value: string | number) => {
-    const updatedLanguages = formData.languages.map((lang, i) => 
+    const updatedLanguages = formData.languages.map((lang, i) =>
       i === index ? { ...lang, [field]: value } : lang
     );
     updateFormData({ languages: updatedLanguages });
@@ -61,7 +61,7 @@ export default function SkillsStep() {
   };
 
   const updateInterest = (index: number, value: string) => {
-    const updatedInterests = formData.interests.map((interest, i) => 
+    const updatedInterests = formData.interests.map((interest, i) =>
       i === index ? value : interest
     );
     updateFormData({ interests: updatedInterests });
@@ -77,7 +77,7 @@ export default function SkillsStep() {
       {/* 专业技能 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">专业技能</h3>
-        
+
         <div className="space-y-4">
           {formData.skills.map((skill, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 relative">
@@ -103,7 +103,7 @@ export default function SkillsStep() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     熟练度 ({skill.progress}%)
@@ -136,7 +136,7 @@ export default function SkillsStep() {
       {/* 语言能力 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">语言能力</h3>
-        
+
         <div className="space-y-4">
           {formData.languages.map((language, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 relative">
@@ -162,7 +162,7 @@ export default function SkillsStep() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     水平 ({language.progress}%)
@@ -195,7 +195,7 @@ export default function SkillsStep() {
       {/* 兴趣爱好 */}
       <div className="space-y-6">
         <h3 className="text-xl font-semibold text-gray-900">兴趣爱好</h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {formData.interests.map((interest, index) => (
             <div key={index} className="relative">

@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
-import { ResumeFormData } from '../../types/resume';
+import React, { createContext, useContext, useReducer, type ReactNode } from 'react';
+import type { ResumeFormData } from '../types/resume';
 
 interface FormState {
   currentStep: number;
@@ -8,7 +8,7 @@ interface FormState {
   errors: Record<string, string>;
 }
 
-type FormAction = 
+type FormAction =
   | { type: 'SET_STEP'; payload: number }
   | { type: 'UPDATE_FORM_DATA'; payload: Partial<ResumeFormData> }
   | { type: 'SET_SUBMITTING'; payload: boolean }
@@ -50,8 +50,8 @@ function formReducer(state: FormState, action: FormAction): FormState {
     case 'SET_STEP':
       return { ...state, currentStep: action.payload };
     case 'UPDATE_FORM_DATA':
-      return { 
-        ...state, 
+      return {
+        ...state,
         formData: { ...state.formData, ...action.payload }
       };
     case 'SET_SUBMITTING':

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../../../context/FormContext';
 
 export default function ExperienceStep() {
   const { state, updateFormData } = useFormContext();
@@ -24,7 +24,7 @@ export default function ExperienceStep() {
   };
 
   const updateExperience = (index: number, field: string, value: string) => {
-    const updatedExperience = formData.workExperience.map((exp, i) => 
+    const updatedExperience = formData.workExperience.map((exp, i) =>
       i === index ? { ...exp, [field]: value } : exp
     );
     updateFormData({ workExperience: updatedExperience });

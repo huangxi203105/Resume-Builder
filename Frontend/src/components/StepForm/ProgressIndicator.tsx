@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext } from './FormContext';
+import { useFormContext } from '../../context/FormContext';
 
 const steps = [
   { id: 0, title: '基本信息', description: '个人资料' },
@@ -21,23 +21,21 @@ export default function ProgressIndicator() {
           <div key={step.id} className="flex flex-col items-center relative">
             {/* 连接线 */}
             {index < steps.length - 1 && (
-              <div 
-                className={`absolute top-6 left-8 w-full h-0.5 ${
-                  currentStep > index ? 'bg-primary' : 'bg-gray-300'
-                }`}
+              <div
+                className={`absolute top-6 left-8 w-full h-0.5 ${currentStep > index ? 'bg-primary' : 'bg-gray-300'
+                  }`}
                 style={{ width: 'calc(100vw / 6 - 2rem)' }}
               />
             )}
-            
+
             {/* 步骤圆圈 */}
-            <div 
-              className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold relative z-10 ${
-                currentStep > index 
-                  ? 'bg-primary text-white' 
+            <div
+              className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold relative z-10 ${currentStep > index
+                  ? 'bg-primary text-white'
                   : currentStep === index
-                  ? 'bg-primary text-white ring-4 ring-primary/20'
-                  : 'bg-gray-200 text-gray-500'
-              }`}
+                    ? 'bg-primary text-white ring-4 ring-primary/20'
+                    : 'bg-gray-200 text-gray-500'
+                }`}
             >
               {currentStep > index ? (
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -47,12 +45,11 @@ export default function ProgressIndicator() {
                 index + 1
               )}
             </div>
-            
+
             {/* 步骤标题 */}
             <div className="mt-2 text-center">
-              <div className={`text-sm font-medium ${
-                currentStep >= index ? 'text-primary' : 'text-gray-500'
-              }`}>
+              <div className={`text-sm font-medium ${currentStep >= index ? 'text-primary' : 'text-gray-500'
+                }`}>
                 {step.title}
               </div>
               <div className="text-xs text-gray-400 mt-1">
