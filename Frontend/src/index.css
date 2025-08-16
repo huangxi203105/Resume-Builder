@@ -16,4 +16,34 @@
   .hover-shadow-orange:hover {
     box-shadow: 0 25px 50px -12px #f76001;
   }
+  .gradient-button {
+    @apply cursor-pointer 
+           bg-gradient-to-r 
+           from-violet-600 
+           to-fuchsia-600 
+           text-white 
+           px-4 
+           py-2 
+           rounded-[10px] 
+           hover:scale-105 
+           transition-all 
+           duration-300;
+  }
+}
+html {
+  font-size: 14px; /* 1rem = 14px */
+}
+
+/* 中等屏幕 */
+@media (min-width: 768px) {
+  html {
+    font-size: 16px; /* 1rem = 16px */
+  }
+}
+
+/* 大屏幕 */
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px; /* 1rem = 18px */
+  }
 }

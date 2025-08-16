@@ -43,7 +43,7 @@ const IndexPage = () => {
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-full">
       <div className="z-20 header">
-        <header className="w-full fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-violet-100/50 py-4 px-110 flex justify-between">
+        <header className="w-full fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-violet-100/50 py-4 px-80 flex justify-between">
           <div className="flex items-center gap-2">
             <div className="w-[30px] h-[30px] bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-[12px] shadow-md"></div>
             <div className="text-xl font-semibold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">ResumeXpert</div>
@@ -67,7 +67,7 @@ const IndexPage = () => {
           </div>
         </header>
       </div>
-      <div className="px-110 pt-[150px] pb-[150px]">
+      <div className="px-80 pt-[150px] pb-[150px]">
         <section className="flex justify-between">
           <div className="w-[50%] flex flex-col gap-6">
             <div data-aos="fade-up" data-aos-delay="200" className="text-7xl font-bold text-black">Craft</div>
