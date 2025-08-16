@@ -4,6 +4,7 @@ import Input from "./Input"
 import http from "../utils/http"
 import API_PATH from "../utils/apiPath"
 import { UserContext } from "../context/UserContext"
+import Toast from "../utils/toast";
 interface LoginFormProps {
   onSwitchView: () => void
 }
@@ -18,13 +19,16 @@ export const LoginForm = (props: LoginFormProps) => {
     try {
       const res = await http.post(API_PATH.LOGIN, { email, password })
       localStorage.setItem('token', res.data.token)
-      // 更新用户状态
+      
+      Toast.success("登录成功！");
+      
       if (userContext && userContext.setUser) {
         userContext.setUser(res.data)
         navigate('/resume/new');
         return;
       }
     } catch (err) {
+      Toast.error("登录失败，请检查邮箱和密码");
       console.log(err)
     }
   }

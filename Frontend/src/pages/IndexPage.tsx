@@ -41,7 +41,7 @@ const IndexPage = () => {
     }
   }
   return (
-    <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
+    <div className="bg-[#f8fbfd] min-h-screen w-full">
       <div className="z-20 header">
         <header className="w-full fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-violet-100/50 py-4 px-110 flex justify-between">
           <div className="flex items-center gap-2">

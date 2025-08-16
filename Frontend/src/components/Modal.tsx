@@ -58,14 +58,14 @@ const Modal = forwardRef(({ isOpen, onClose, disableScroll = true,initialView="l
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}
       onClick={handleOverlayClick}
       data-testid="modal-overlay">
-      <div className='w-[400px] p-5 bg-[#fcfcfe] relative rounded-lg shadow-lg flex flex-col gap-3'>
-        <div className='absolute top-[20px] right-[20px]'>
-          <button onClick={onClose} className='bg-red-300 text-red-500 w-[30px] h-[30px] rounded-[5px] shadow-lg shadow'>X</button>
+      <div className='w-[400px] max-w-[90vw] mx-auto p-5 bg-[#fcfcfe] relative rounded-lg shadow-lg flex flex-col gap-3'>
+        <div className='absolute top-[20px] right-[20px] z-10'>
+          <button onClick={onClose} className='bg-red-300 text-red-500 w-[30px] h-[30px] rounded-[5px] shadow-lg hover:bg-red-400 transition-colors'>X</button>
         </div>
         {view === 'login' ? (
           <LoginForm onSwitchView={() => switchView('register')} />
         ) : (
-          <RegisterForm onSwitchView={() => switchView('login')} />
+          <RegisterForm ref={ref} onSwitchView={() => switchView('login')} />
         )}
       </div>
     </div>

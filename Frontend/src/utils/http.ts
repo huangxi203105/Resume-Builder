@@ -45,12 +45,12 @@ http.interceptors.response.use(
     if (error.response) {
       // 服务器返回错误状态码
       const status = error.response.status;
-
+      const errorData = error.response.data;
       switch (status) {
         case 401:
           console.error('未授权，请重新登录');
           navigateTo('/');
-          break;
+          return Promise.reject();
         case 403:
           console.error('拒绝访问');
           break;
@@ -59,9 +59,10 @@ http.interceptors.response.use(
           break;
         case 500:
           console.error('服务器错误');
-          break;
+          return Promise.reject(errorData);    
         default:
           console.error(`请求错误: ${status}`);
+          return Promise.reject(errorData);
       }
     } else if (error.request) {
       // 请求已发出但没有响应

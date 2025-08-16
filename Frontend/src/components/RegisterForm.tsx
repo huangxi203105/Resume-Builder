@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom"
 import Input from "./Input"
 import http from "../utils/http"
 import API_PATH from "../utils/apiPath"
+import Toast from "../utils/toast"
 interface RegisterFormProps {
   onSwitchView: () => void
+  ref: any
 }
 export const RegisterForm = (props: RegisterFormProps) => {
   const navigate = useNavigate();
@@ -14,12 +16,12 @@ export const RegisterForm = (props: RegisterFormProps) => {
 
   const register = async () => {
     try {
-      const res = await http.post(API_PATH.REGISTER, { fullName, email, password })
-      console.log(res)
+      const res = await http.post(API_PATH.REGISTER, { name: fullName , email, password })
       localStorage.setItem('token', res.data.token)
-      navigate('/');
-    } catch (err) {
-      console.log(err)
+      Toast.success("注册成功！");
+      props.ref.current.switchView('login')
+    } catch (err:any) {
+      Toast.error(err.msg);
     }
   }
   return (

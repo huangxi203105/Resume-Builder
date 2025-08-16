@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import http from "../utils/http";
 import API_PATH from "../utils/apiPath";
 import { UserContext } from "../context/UserContext";
-
+import Toast from "../utils/toast";
+import StepForm from "../components/StepForm/StepForm";
 const ResumePage = () => {
   const navigate = useNavigate();
   const [resume, setResume] = useState<any>(null);
@@ -37,6 +38,9 @@ const ResumePage = () => {
             ) : null}
           </div>
         </header>
+      </div>
+      <div>
+        <StepForm />
       </div>
     </div>
   )

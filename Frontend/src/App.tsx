@@ -3,7 +3,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import IndexPage from "./pages/IndexPage.tsx";
 import ResumePage from "./pages/ResumePage.tsx";
 import UserProvider from "./context/UserContext.tsx";
+import { FormProvider, useFormContext } from "./context/FormContext";
 import { setNavigateFunction, clearNavigateFunction } from "./utils/navigation";
+import StepForm from "./components/StepForm/StepForm.tsx";
+import ToastProvider from "./components/Toast";
 // 内部路由组件，用于设置导航函数
 const AppRoutes = () => {
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<IndexPage />} />
       <Route path="/resume/:id" element={<ResumePage />} />
+      <Route path="/resume/create" element={<FormProvider><StepForm /></FormProvider>} />
     </Routes>
   );
 };
@@ -30,6 +34,7 @@ const App = () => {
   return (
     <UserProvider>
       <AppRoutes />
+      <ToastProvider />
     </UserProvider>
   )
 }

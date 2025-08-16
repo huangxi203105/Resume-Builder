@@ -15,6 +15,15 @@ type FormAction =
   | { type: 'SET_ERRORS'; payload: Record<string, string> }
   | { type: 'RESET_FORM' };
 
+interface FormContextType {
+  state: FormState;
+  dispatch: React.Dispatch<FormAction>;
+  nextStep: () => void;
+  prevStep: () => void;
+  updateFormData: (data: Partial<ResumeFormData>) => void;
+  setErrors: (errors: Record<string, string>) => void;
+  }
+
 const initialState: FormState = {
   currentStep: 0,
   formData: {
@@ -63,15 +72,6 @@ function formReducer(state: FormState, action: FormAction): FormState {
     default:
       return state;
   }
-}
-
-interface FormContextType {
-  state: FormState;
-  dispatch: React.Dispatch<FormAction>;
-  nextStep: () => void;
-  prevStep: () => void;
-  updateFormData: (data: Partial<ResumeFormData>) => void;
-  setErrors: (errors: Record<string, string>) => void;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
