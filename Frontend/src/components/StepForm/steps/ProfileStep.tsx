@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function ProfileStep() {
   const { state, updateFormData } = useFormContext();
@@ -28,43 +29,34 @@ export default function ProfileStep() {
 
       {/* 简历标题 */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          简历标题 *
-        </label>
-        <input
-          type="text"
-          value={formData.title}
-          onChange={(e) => handleInputChange('title', e.target.value)}
-          placeholder="例如：前端开发工程师简历"
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+        <Input 
+          type="text" 
+          value={formData.title} 
+          onChange={(e) => handleInputChange('title', e.target.value)} 
+          placeholder="例如：前端开发工程师简历" 
+          label="简历标题 *"
         />
       </div>
 
       {/* 姓名 */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          姓名 *
-        </label>
-        <input
-          type="text"
-          value={formData.profileInfo.fullName}
-          onChange={(e) => handleInputChange('profileInfo.fullName', e.target.value)}
-          placeholder="请输入您的姓名"
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+        <Input 
+          type="text" 
+          value={formData.profileInfo.fullName} 
+          onChange={(e) => handleInputChange('profileInfo.fullName', e.target.value)} 
+          placeholder="请输入您的姓名" 
+          label="姓名 *"
         />
       </div>
 
       {/* 职位 */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          目标职位 *
-        </label>
-        <input
-          type="text"
-          value={formData.profileInfo.designation}
-          onChange={(e) => handleInputChange('profileInfo.designation', e.target.value)}
-          placeholder="例如：前端开发工程师"
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+        <Input 
+          type="text" 
+          value={formData.profileInfo.designation} 
+          onChange={(e) => handleInputChange('profileInfo.designation', e.target.value)} 
+          placeholder="例如：前端开发工程师" 
+          label="目标职位 *"
         />
       </div>
 
@@ -78,13 +70,13 @@ export default function ProfileStep() {
           onChange={(e) => handleInputChange('profileInfo.summary', e.target.value)}
           placeholder="简要介绍您的专业背景、技能特长和职业目标..."
           rows={4}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none placeholder:text-gray-400 placeholder:font-light"
         />
         <p className="text-sm text-gray-500 mt-1">建议 100-200 字</p>
       </div>
 
       {/* 头像上传区域 */}
-      <div>
+      {/* <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           个人头像
         </label>
@@ -112,7 +104,7 @@ export default function ProfileStep() {
             <p className="text-sm text-gray-500 mt-1">支持 JPG、PNG 格式</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import ExperienceStep from './steps/ExperienceStep';
 import EducationStep from './steps/EducationStep';
 import SkillsStep from './steps/SkillsStep';
 import ProjectsStep from './steps/ProjectsStep';
+import { NextBtn } from '../NextBtn/NextBtn';
 
 const stepComponents = [
   ProfileStep,
@@ -44,14 +45,14 @@ function StepFormContent() {
             onClick={prevStep}
             disabled={isFirstStep}
             className={`px-6 py-3 rounded-xl font-medium transition-all ${isFirstStep
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
           >
             上一步
           </button>
-
-          <button
+          <NextBtn onClick={nextStep} msg={isLastStep ? 'Finish' : 'Next'} />
+          {/* <button
             onClick={nextStep}
             disabled={isLastStep}
             className={`px-6 py-3 rounded-xl font-medium transition-all ${isLastStep
@@ -60,7 +61,7 @@ function StepFormContent() {
               }`}
           >
             {isLastStep ? '完成' : '下一步'}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

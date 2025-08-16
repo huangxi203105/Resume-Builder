@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function ContactStep() {
   const { state, updateFormData } = useFormContext();
@@ -24,85 +25,67 @@ export default function ContactStep() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 邮箱 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            邮箱地址 *
-          </label>
-          <input
+          <Input
             type="email"
             value={formData.contactInfo.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             placeholder="your.email@example.com"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="邮箱地址 *"
           />
         </div>
 
         {/* 手机号 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            手机号码 *
-          </label>
-          <input
+          <Input
             type="tel"
             value={formData.contactInfo.phone}
             onChange={(e) => handleInputChange('phone', e.target.value)}
             placeholder="138-0000-0000"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="手机号码 *"
           />
         </div>
 
         {/* 所在地 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            所在地
-          </label>
-          <input
+          <Input
             type="text"
             value={formData.contactInfo.location}
             onChange={(e) => handleInputChange('location', e.target.value)}
             placeholder="北京市朝阳区"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="所在地"
           />
         </div>
 
         {/* LinkedIn */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            LinkedIn
-          </label>
-          <input
+          <Input
             type="url"
             value={formData.contactInfo.linkedin}
             onChange={(e) => handleInputChange('linkedin', e.target.value)}
             placeholder="https://linkedin.com/in/yourprofile"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="LinkedIn"
           />
         </div>
 
         {/* GitHub */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            GitHub
-          </label>
-          <input
+          <Input
             type="url"
             value={formData.contactInfo.github}
             onChange={(e) => handleInputChange('github', e.target.value)}
             placeholder="https://github.com/yourusername"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="GitHub"
           />
         </div>
 
         {/* 个人网站 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            个人网站
-          </label>
-          <input
+          <Input
             type="url"
             value={formData.contactInfo.website}
             onChange={(e) => handleInputChange('website', e.target.value)}
             placeholder="https://yourwebsite.com"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            label="个人网站"
           />
         </div>
       </div>

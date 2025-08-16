@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function SkillsStep() {
   const { state, updateFormData } = useFormContext();
@@ -92,21 +93,17 @@ export default function SkillsStep() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    技能名称
-                  </label>
-                  <input
+                  <Input
                     type="text"
                     value={skill.name}
                     onChange={(e) => updateSkill(index, 'name', e.target.value)}
-                    placeholder="例如：React、Python、UI设计"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="技能名称"
+                    label="技能名称"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    熟练度 ({skill.progress}%)
+                    熟练度: {skill.progress}%
                   </label>
                   <input
                     type="range"
@@ -124,12 +121,9 @@ export default function SkillsStep() {
 
         <button
           onClick={addSkill}
-          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加技能</span>
+          + 添加技能
         </button>
       </div>
 
@@ -151,21 +145,17 @@ export default function SkillsStep() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    语言
-                  </label>
-                  <input
+                  <Input
                     type="text"
                     value={language.name}
                     onChange={(e) => updateLanguage(index, 'name', e.target.value)}
-                    placeholder="例如：英语、日语、法语"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="语言名称"
+                    label="语言名称"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    水平 ({language.progress}%)
+                    熟练度: {language.progress}%
                   </label>
                   <input
                     type="range"
@@ -183,12 +173,9 @@ export default function SkillsStep() {
 
         <button
           onClick={addLanguage}
-          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加语言</span>
+          + 添加语言
         </button>
       </div>
 
@@ -199,16 +186,16 @@ export default function SkillsStep() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {formData.interests.map((interest, index) => (
             <div key={index} className="relative">
-              <input
+              <Input
                 type="text"
                 value={interest}
                 onChange={(e) => updateInterest(index, e.target.value)}
                 placeholder="例如：摄影、旅行、阅读"
-                className="w-full px-3 py-2 pr-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                label=""
               />
               <button
                 onClick={() => removeInterest(index)}
-                className="absolute right-2 top-2 text-gray-400 hover:text-red-500 transition-colors"
+                className="absolute right-2 top-8 text-gray-400 hover:text-red-500 transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -220,12 +207,9 @@ export default function SkillsStep() {
 
         <button
           onClick={addInterest}
-          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加兴趣</span>
+          + 添加兴趣爱好
         </button>
       </div>
     </div>

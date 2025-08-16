@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import http from "../utils/http";
 import API_PATH from "../utils/apiPath";
 import { UserContext } from "../context/UserContext";
@@ -7,6 +7,7 @@ import Toast from "../utils/toast";
 import StepForm from "../components/StepForm/StepForm";
 const ResumePage = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [resume, setResume] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

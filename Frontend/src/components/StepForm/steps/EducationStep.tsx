@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function EducationStep() {
   const { state, updateFormData } = useFormContext();
@@ -33,14 +34,12 @@ export default function EducationStep() {
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-2">教育背景</h2>
-        <p className="text-gray-600">展示您的学历和教育经历</p>
+        <p className="text-gray-600">展示您的学历信息和学术成就</p>
       </div>
 
-      {/* 教育经历列表 */}
       <div className="space-y-6">
         {formData.education.map((education, index) => (
           <div key={index} className="bg-gray-50 rounded-xl p-6 relative">
-            {/* 删除按钮 */}
             <button
               onClick={() => removeEducation(index)}
               className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors"
@@ -51,74 +50,42 @@ export default function EducationStep() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* 学位/学历 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  学位/学历 *
-                </label>
-                <input
-                  type="text"
-                  value={education.degree}
-                  onChange={(e) => updateEducation(index, 'degree', e.target.value)}
-                  placeholder="例如：计算机科学与技术学士"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 学校/机构 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  学校/机构 *
-                </label>
-                <input
-                  type="text"
-                  value={education.institute}
-                  onChange={(e) => updateEducation(index, 'institute', e.target.value)}
-                  placeholder="例如：清华大学"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 开始时间 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  开始时间 *
-                </label>
-                <input
-                  type="month"
-                  value={education.startDate}
-                  onChange={(e) => updateEducation(index, 'startDate', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 结束时间 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  结束时间
-                </label>
-                <input
-                  type="month"
-                  value={education.endDate}
-                  onChange={(e) => updateEducation(index, 'endDate', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-                <p className="text-sm text-gray-500 mt-1">留空表示在读</p>
-              </div>
+              <Input
+                type="text"
+                value={education.degree}
+                onChange={(e) => updateEducation(index, 'degree', e.target.value)}
+                placeholder="学位/学历"
+                label="学位/学历 *"
+              />
+              <Input
+                type="text"
+                value={education.institute}
+                onChange={(e) => updateEducation(index, 'institute', e.target.value)}
+                placeholder="学校名称"
+                label="学校名称 *"
+              />
+              <Input
+                type="date"
+                value={education.startDate}
+                onChange={(e) => updateEducation(index, 'startDate', e.target.value)}
+                label="开始时间 *"
+              />
+              <Input
+                type="date"
+                value={education.endDate}
+                onChange={(e) => updateEducation(index, 'endDate', e.target.value)}
+                label="结束时间"
+              />
             </div>
           </div>
         ))}
       </div>
 
-      {/* 添加教育经历按钮 */}
       <button
         onClick={addEducation}
-        className="w-full py-4 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+        className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
       >
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
-        <span>添加教育经历</span>
+        + 添加教育经历
       </button>
 
       {/* 提示信息 */}

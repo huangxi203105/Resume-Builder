@@ -24,7 +24,7 @@ export const LoginForm = (props: LoginFormProps) => {
       
       if (userContext && userContext.setUser) {
         userContext.setUser(res.data)
-        navigate('/resume/new');
+        navigate('/resumeDetail');
         return;
       }
     } catch (err) {

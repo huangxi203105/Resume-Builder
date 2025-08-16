@@ -18,13 +18,14 @@ const Input: React.FC<InputProps> = ({ onChange,value,type, placeholder, label }
         <label htmlFor="input">{label}</label>
       </div>
       <div>
-        <input value={value} onChange={onChange} placeholder={placeholder} onFocus={onFocus} onBlur={() => setIsFocused(false)} className="w-full p-2 border border-gray-300 rounded-md 
+        <input type={type} value={value} onChange={onChange} placeholder={placeholder} onFocus={onFocus} onBlur={() => setIsFocused(false)} className="w-full p-2 border border-gray-300 rounded-md 
             transition-all duration-300 ease-in-out
+            placeholder:text-gray-400 placeholder:font-light
             focus:border-purple-600
             focus:border-2
             focus:outline-none
             focus:ring-4 focus:ring-purple-500/20
-            focus:shadow-lg focus:shadow-violet-500/10"  type={type} />
+            focus:shadow-lg focus:shadow-violet-500/10"/>
       </div>
     </div>
   )

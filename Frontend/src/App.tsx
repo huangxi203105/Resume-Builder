@@ -24,8 +24,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<IndexPage />} />
-      <Route path="/resume/:id" element={<ResumePage />} />
-      <Route path="/resume/create" element={<FormProvider><StepForm /></FormProvider>} />
+      <Route path="/resumeDetail/" element={<ResumePage />} />
+      <Route path="/resumeCreate/" element={<FormProvider><StepForm /></FormProvider>} />
     </Routes>
   );
 };

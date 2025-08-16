@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function ProjectsStep() {
   const { state, updateFormData } = useFormContext();
@@ -98,21 +99,14 @@ export default function ProjectsStep() {
               </button>
 
               <div className="space-y-4">
-                {/* 项目名称 */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    项目名称 *
-                  </label>
-                  <input
-                    type="text"
-                    value={project.title}
-                    onChange={(e) => updateProject(index, 'title', e.target.value)}
-                    placeholder="例如：电商管理系统"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                  />
-                </div>
-
-                {/* 项目描述 */}
+                <Input
+                  type="text"
+                  value={project.title}
+                  onChange={(e) => updateProject(index, 'title', e.target.value)}
+                  placeholder="项目名称"
+                  label="项目名称 *"
+                />
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     项目描述 *
@@ -120,40 +114,27 @@ export default function ProjectsStep() {
                   <textarea
                     value={project.description}
                     onChange={(e) => updateProject(index, 'description', e.target.value)}
-                    placeholder="描述项目的功能、技术栈、您的职责和项目成果..."
+                    placeholder="描述项目的功能、技术栈、您的贡献和成果..."
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none placeholder:text-gray-400 placeholder:font-light"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* GitHub 链接 */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      GitHub 链接
-                    </label>
-                    <input
-                      type="url"
-                      value={project.github}
-                      onChange={(e) => updateProject(index, 'github', e.target.value)}
-                      placeholder="https://github.com/username/project"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    />
-                  </div>
-
-                  {/* 在线演示 */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      在线演示
-                    </label>
-                    <input
-                      type="url"
-                      value={project.liveDemo}
-                      onChange={(e) => updateProject(index, 'liveDemo', e.target.value)}
-                      placeholder="https://your-project-demo.com"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    />
-                  </div>
+                  <Input
+                    type="url"
+                    value={project.github}
+                    onChange={(e) => updateProject(index, 'github', e.target.value)}
+                    placeholder="https://github.com/username/project"
+                    label="GitHub 链接"
+                  />
+                  <Input
+                    type="url"
+                    value={project.liveDemo}
+                    onChange={(e) => updateProject(index, 'liveDemo', e.target.value)}
+                    placeholder="https://project-demo.com"
+                    label="在线演示"
+                  />
                 </div>
               </div>
             </div>
@@ -162,12 +143,9 @@ export default function ProjectsStep() {
 
         <button
           onClick={addProject}
-          className="w-full py-4 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加项目</span>
+          + 添加项目
         </button>
       </div>
 
@@ -187,32 +165,21 @@ export default function ProjectsStep() {
                 </svg>
               </button>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    奖项名称
-                  </label>
-                  <input
-                    type="text"
-                    value={achievement.name}
-                    onChange={(e) => updateAchievement(index, 'name', e.target.value)}
-                    placeholder="例如：优秀员工奖"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    描述
-                  </label>
-                  <input
-                    type="text"
-                    value={achievement.description}
-                    onChange={(e) => updateAchievement(index, 'description', e.target.value)}
-                    placeholder="获奖原因或成就描述"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
+              <div className="space-y-4">
+                <Input
+                  type="text"
+                  value={achievement.name}
+                  onChange={(e) => updateAchievement(index, 'name', e.target.value)}
+                  placeholder="奖项名称"
+                  label="奖项名称"
+                />
+                <Input
+                  type="text"
+                  value={achievement.description}
+                  onChange={(e) => updateAchievement(index, 'description', e.target.value)}
+                  placeholder="获奖描述"
+                  label="获奖描述"
+                />
               </div>
             </div>
           ))}
@@ -220,18 +187,15 @@ export default function ProjectsStep() {
 
         <button
           onClick={addAchievement}
-          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加成就</span>
+          + 添加成就奖项
         </button>
       </div>
 
-      {/* 证书认证 */}
+      {/* 认证证书 */}
       <div className="space-y-6">
-        <h3 className="text-xl font-semibold text-gray-900">证书认证</h3>
+        <h3 className="text-xl font-semibold text-gray-900">认证证书</h3>
 
         <div className="space-y-4">
           {formData.certifications.map((certification, index) => (
@@ -246,44 +210,27 @@ export default function ProjectsStep() {
               </button>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    证书名称
-                  </label>
-                  <input
-                    type="text"
-                    value={certification.title}
-                    onChange={(e) => updateCertification(index, 'title', e.target.value)}
-                    placeholder="例如：AWS认证"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    颁发机构
-                  </label>
-                  <input
-                    type="text"
-                    value={certification.issuer}
-                    onChange={(e) => updateCertification(index, 'issuer', e.target.value)}
-                    placeholder="例如：Amazon Web Services"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    获得年份
-                  </label>
-                  <input
-                    type="text"
-                    value={certification.year}
-                    onChange={(e) => updateCertification(index, 'year', e.target.value)}
-                    placeholder="2024"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                </div>
+                <Input
+                  type="text"
+                  value={certification.title}
+                  onChange={(e) => updateCertification(index, 'title', e.target.value)}
+                  placeholder="证书名称"
+                  label="证书名称"
+                />
+                <Input
+                  type="text"
+                  value={certification.issuer}
+                  onChange={(e) => updateCertification(index, 'issuer', e.target.value)}
+                  placeholder="颁发机构"
+                  label="颁发机构"
+                />
+                <Input
+                  type="text"
+                  value={certification.year}
+                  onChange={(e) => updateCertification(index, 'year', e.target.value)}
+                  placeholder="2024"
+                  label="获得年份"
+                />
               </div>
             </div>
           ))}
@@ -291,12 +238,9 @@ export default function ProjectsStep() {
 
         <button
           onClick={addCertification}
-          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+          className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>添加证书</span>
+          + 添加认证证书
         </button>
       </div>
 

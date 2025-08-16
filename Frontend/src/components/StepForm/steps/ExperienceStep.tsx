@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import Input from '../../Input';
 
 export default function ExperienceStep() {
   const { state, updateFormData } = useFormContext();
@@ -37,11 +38,9 @@ export default function ExperienceStep() {
         <p className="text-gray-600">展示您的职业发展历程和工作成就</p>
       </div>
 
-      {/* 工作经历列表 */}
       <div className="space-y-6">
         {formData.workExperience.map((experience, index) => (
           <div key={index} className="bg-gray-50 rounded-xl p-6 relative">
-            {/* 删除按钮 */}
             <button
               onClick={() => removeExperience(index)}
               className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors"
@@ -51,92 +50,59 @@ export default function ExperienceStep() {
               </svg>
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* 公司名称 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  公司名称 *
-                </label>
-                <input
-                  type="text"
-                  value={experience.companyName}
-                  onChange={(e) => updateExperience(index, 'companyName', e.target.value)}
-                  placeholder="例如：阿里巴巴集团"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 职位 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  职位 *
-                </label>
-                <input
-                  type="text"
-                  value={experience.role}
-                  onChange={(e) => updateExperience(index, 'role', e.target.value)}
-                  placeholder="例如：前端开发工程师"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 开始时间 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  开始时间 *
-                </label>
-                <input
-                  type="month"
-                  value={experience.startDate}
-                  onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              {/* 结束时间 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  结束时间
-                </label>
-                <input
-                  type="month"
-                  value={experience.endDate}
-                  onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-                <p className="text-sm text-gray-500 mt-1">留空表示至今</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <Input
+                type="text"
+                value={experience.companyName}
+                onChange={(e) => updateExperience(index, 'companyName', e.target.value)}
+                placeholder="公司名称"
+                label="公司名称 *"
+              />
+              <Input
+                type="text"
+                value={experience.role}
+                onChange={(e) => updateExperience(index, 'role', e.target.value)}
+                placeholder="职位名称"
+                label="职位名称 *"
+              />
+              <Input
+                type="date"
+                value={experience.startDate}
+                onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
+                label="开始时间 *"
+              />
+              <Input
+                type="date"
+                value={experience.endDate}
+                onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
+                label="结束时间"
+              />
             </div>
 
-            {/* 工作描述 */}
-            <div className="mt-4">
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                工作描述
+                工作描述 *
               </label>
               <textarea
                 value={experience.description}
                 onChange={(e) => updateExperience(index, 'description', e.target.value)}
                 placeholder="描述您在该职位的主要职责、工作成果和技能运用..."
-                rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                rows={4}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none placeholder:text-gray-400 placeholder:font-light"
               />
             </div>
           </div>
         ))}
       </div>
 
-      {/* 添加工作经历按钮 */}
       <button
         onClick={addExperience}
-        className="w-full py-4 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-all flex items-center justify-center space-x-2"
+        className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-primary hover:text-primary transition-colors"
       >
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
-        <span>添加工作经历</span>
+        + 添加工作经历
       </button>
 
-      {/* 提示信息 */}
+      {/* 提示信息保持不变 */}
       {formData.workExperience.length === 0 && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
           <div className="flex">

@@ -35,7 +35,7 @@ const IndexPage = () => {
 
   const ToResumePage = () => {
     if (userContext?.user) {
-      navigate('/resume/new');
+      navigate('/resumeDeatil');
     } else {
       showModal()
     }
