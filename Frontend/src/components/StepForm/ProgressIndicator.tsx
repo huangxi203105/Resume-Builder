@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useFormContext } from '../../context/FormContext';
-
+import { Eye, Download } from "lucide-react";
+import Modal from '../Modal';
+import TemplateTwo from '../../components/ResumeTemplate/TemplateTwo';
 const steps = [
   { id: 0, title: '基本信息', description: '个人资料' },
   { id: 1, title: '联系方式', description: '联系信息' },
@@ -13,28 +15,35 @@ const steps = [
 export default function ProgressIndicator() {
   const { state } = useFormContext();
   const { currentStep } = state;
-
+  const [showModal, setShowModal] = useState(false);
+  const ref = useRef(null);
+  const previewResume = () => {
+    console.log("preview")
+    setShowModal(true);
+  }
+  const closeModal = () => {
+    setShowModal(false);
+  }
   return (
-    <div className="w-full py-6">
-      <div className="flex items-center justify-between">
+    <div className="w-full h-full py-4 flex flex-col justify-between ">
+      <div className="flex flex-col space-y-8">
         {steps.map((step, index) => (
-          <div key={step.id} className="flex flex-col items-center relative">
-            {/* 连接线 */}
+          <div key={step.id} className="flex items-center relative">
+            {/* 连接线 - 竖直方向 */}
             {index < steps.length - 1 && (
               <div
-                className={`absolute top-6 left-8 w-full h-0.5 ${currentStep > index ? 'bg-primary' : 'bg-gray-300'
+                className={`absolute transition-all duration-1500 left-5 top-12 w-2 h-8 ${currentStep > index ? 'bg-green-300' : 'bg-gray-300'
                   }`}
-                style={{ width: 'calc(100vw / 6 - 2rem)' }}
               />
             )}
 
             {/* 步骤圆圈 */}
             <div
-              className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold relative z-10 ${currentStep > index
-                  ? 'bg-primary text-white'
-                  : currentStep === index
-                    ? 'bg-primary text-white ring-4 ring-primary/20'
-                    : 'bg-gray-200 text-gray-500'
+              className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold relative z-10 flex-shrink-0 ${currentStep > index
+                ? 'bg-green-300 text-white'
+                : currentStep === index
+                  ? 'bg-violet-600 text-white ring-4 ring-primary/20'
+                  : 'bg-gray-200 text-gray-500'
                 }`}
             >
               {currentStep > index ? (
@@ -46,9 +55,9 @@ export default function ProgressIndicator() {
               )}
             </div>
 
-            {/* 步骤标题 */}
-            <div className="mt-2 text-center">
-              <div className={`text-sm font-medium ${currentStep >= index ? 'text-primary' : 'text-gray-500'
+            {/* 步骤标题 - 右侧显示 */}
+            <div className="ml-4 flex-1">
+              <div className={`text-sm font-medium ${currentStep > index ? 'text-green-400' : 'text-gray-500'
                 }`}>
                 {step.title}
               </div>
@@ -59,6 +68,19 @@ export default function ProgressIndicator() {
           </div>
         ))}
       </div>
+      <div className='flex flex-col justify-center gap-2'>
+        <button onClick={previewResume} className='flex items-center gap-2 bg-violet-100 text-violet-700 px-4 py-2 rounded-lg cursor-pointer hover:bg-violet-200 transition-all duration-500 active:scale-90'>
+          <span><Eye size={20} /></span>
+          <span>预览</span>
+        </button>
+        <button className='flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-lg cursor-pointer hover:bg-green-200 transition-all duration-500 active:scale-90'>
+          <span><Download size={20} /></span>
+          <span>下载</span>
+        </button>
+      </div>
+      <Modal isOpen={showModal} onClose={closeModal} size='xl'>
+        121313
+      </Modal>
     </div>
   );
 }

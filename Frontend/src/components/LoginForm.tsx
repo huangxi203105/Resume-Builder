@@ -14,14 +14,13 @@ export const LoginForm = (props: LoginFormProps) => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const userContext = useContext(UserContext)
-
   const login = async () => {
     try {
       const res = await http.post(API_PATH.LOGIN, { email, password })
       localStorage.setItem('token', res.data.token)
-      
+
       Toast.success("登录成功！");
-      
+
       if (userContext && userContext.setUser) {
         userContext.setUser(res.data)
         navigate('/resumeDetail');
@@ -39,6 +38,7 @@ export const LoginForm = (props: LoginFormProps) => {
     setPassword(e.target.value)
   }
   return (
+
     <div>
       <div className='text-2xl font-bold flex justify-center'>Welcome Back</div>
       <div className="flex w-full justify-center text-normal text-[#878ca4]">

@@ -27,41 +27,37 @@ function StepFormContent() {
   const isFirstStep = currentStep === 0;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6">
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        {/* 进度指示器 */}
-        <div className="bg-gray-50 px-8 py-4">
-          <ProgressIndicator />
-        </div>
+        {/* 主要内容区域 - 左右布局 */}
+        <div className="flex">
+          {/* 左侧进度指示器 */}
+          <div className="bg-gray-50 p-6 border-r border-gray-200">
+            <ProgressIndicator />
+          </div>
 
-        {/* 表单内容 */}
-        <div className="p-8">
-          <CurrentStepComponent />
-        </div>
+          {/* 右侧表单内容 */}
+          <div className="flex-1">
+            {/* 表单内容 */}
+            <div className="p-8">
+              <CurrentStepComponent />
+            </div>
 
-        {/* 导航按钮 */}
-        <div className="bg-gray-50 px-8 py-6 flex justify-between">
-          <button
-            onClick={prevStep}
-            disabled={isFirstStep}
-            className={`px-6 py-3 rounded-xl font-medium transition-all ${isFirstStep
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-          >
-            上一步
-          </button>
-          <NextBtn onClick={nextStep} msg={isLastStep ? 'Finish' : 'Next'} />
-          {/* <button
-            onClick={nextStep}
-            disabled={isLastStep}
-            className={`px-6 py-3 rounded-xl font-medium transition-all ${isLastStep
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-primary text-white hover:bg-primary/90 hover:shadow-lg'
-              }`}
-          >
-            {isLastStep ? '完成' : '下一步'}
-          </button> */}
+            {/* 导航按钮 */}
+            <div className="bg-gray-50 px-8 py-6 flex justify-between border-t border-gray-200">
+              <button
+                onClick={prevStep}
+                disabled={isFirstStep}
+                className={`px-6 py-3 rounded-xl font-medium transition-all ${isFirstStep
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+              >
+                上一步
+              </button>
+              <NextBtn onClick={nextStep} msg={isLastStep ? 'Finish' : 'Next'} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
