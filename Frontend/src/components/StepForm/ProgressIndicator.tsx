@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormContext } from '../../context/FormContext';
 import { Eye, Download } from "lucide-react";
 import Modal from '../Modal';
-import TemplateTwo from '../../components/ResumeTemplate/TemplateTwo';
+import ResumePreview from '../ResumePreview/ResumePreview';
 const steps = [
   { id: 0, title: '基本信息', description: '个人资料' },
   { id: 1, title: '联系方式', description: '联系信息' },
@@ -16,7 +16,6 @@ export default function ProgressIndicator() {
   const { state } = useFormContext();
   const { currentStep } = state;
   const [showModal, setShowModal] = useState(false);
-  const ref = useRef(null);
   const previewResume = () => {
     console.log("preview")
     setShowModal(true);
@@ -78,8 +77,8 @@ export default function ProgressIndicator() {
           <span>下载</span>
         </button>
       </div>
-      <Modal isOpen={showModal} onClose={closeModal} size='xl'>
-        121313
+      <Modal disableScroll={false} isOpen={showModal} onClose={closeModal} size='xl'>
+        <ResumePreview data={state.formData} />
       </Modal>
     </div>
   );

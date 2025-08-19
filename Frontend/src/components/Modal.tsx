@@ -100,7 +100,7 @@ const Modal = forwardRef(({
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}
       onClick={handleOverlayClick}
       data-testid="modal-overlay">
-      <div className={`${sizeClasses[size]} max-w-[90vw] mx-auto p-5 bg-[#fcfcfe] relative rounded-lg shadow-lg flex flex-col gap-3 ${className}`}>
+      <div className={`${sizeClasses[size]} max-h-[90vh] max-w-[90vw] mx-auto p-5 bg-[#fcfcfe] relative rounded-lg shadow-lg flex flex-col gap-3 ${className} overflow-y-auto`}>
         {showCloseButton && (
           <div className='absolute top-[20px] right-[20px] z-10'>
             <button 
