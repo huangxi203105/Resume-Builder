@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import IndexPage from "./pages/IndexPage.tsx";
 import ResumePage from "./pages/ResumePage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
 import UserProvider from "./context/UserContext.tsx";
 import { FormProvider, useFormContext } from "./context/FormContext";
 import { setNavigateFunction, clearNavigateFunction } from "./utils/navigation";
@@ -33,6 +34,8 @@ const AppRoutes = () => {
           </FormProvider>
         }
       />
+      {/* 404路由 */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
