@@ -1,5 +1,10 @@
-import React, { createContext, useContext, useReducer, type ReactNode } from 'react';
-import type { ResumeFormData } from '../types/resume';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  type ReactNode,
+} from "react";
+import type { ResumeFormData } from "../types/resume";
 
 interface FormState {
   currentStep: number;
@@ -9,11 +14,11 @@ interface FormState {
 }
 
 type FormAction =
-  | { type: 'SET_STEP'; payload: number }
-  | { type: 'UPDATE_FORM_DATA'; payload: Partial<ResumeFormData> }
-  | { type: 'SET_SUBMITTING'; payload: boolean }
-  | { type: 'SET_ERRORS'; payload: Record<string, string> }
-  | { type: 'RESET_FORM' };
+  | { type: "SET_STEP"; payload: number }
+  | { type: "UPDATE_FORM_DATA"; payload: Partial<ResumeFormData> }
+  | { type: "SET_SUBMITTING"; payload: boolean }
+  | { type: "SET_ERRORS"; payload: Record<string, string> }
+  | { type: "RESET_FORM" };
 
 interface FormContextType {
   state: FormState;
@@ -22,24 +27,24 @@ interface FormContextType {
   prevStep: () => void;
   updateFormData: (data: Partial<ResumeFormData>) => void;
   setErrors: (errors: Record<string, string>) => void;
-  }
+}
 
 const initialState: FormState = {
   currentStep: 0,
   formData: {
-    title: '',
+    title: "",
     profileInfo: {
-      fullName: '',
-      designation: '',
-      summary: '',
+      fullName: "",
+      designation: "",
+      summary: "",
     },
     contactInfo: {
-      email: '',
-      phone: '',
-      location: '',
-      linkedin: '',
-      github: '',
-      website: '',
+      email: "",
+      phone: "",
+      location: "",
+      linkedin: "",
+      github: "",
+      website: "",
     },
     workExperience: [],
     education: [],
@@ -56,18 +61,18 @@ const initialState: FormState = {
 
 function formReducer(state: FormState, action: FormAction): FormState {
   switch (action.type) {
-    case 'SET_STEP':
+    case "SET_STEP":
       return { ...state, currentStep: action.payload };
-    case 'UPDATE_FORM_DATA':
+    case "UPDATE_FORM_DATA":
       return {
         ...state,
-        formData: { ...state.formData, ...action.payload }
+        formData: { ...state.formData, ...action.payload },
       };
-    case 'SET_SUBMITTING':
+    case "SET_SUBMITTING":
       return { ...state, isSubmitting: action.payload };
-    case 'SET_ERRORS':
+    case "SET_ERRORS":
       return { ...state, errors: action.payload };
-    case 'RESET_FORM':
+    case "RESET_FORM":
       return initialState;
     default:
       return state;
@@ -80,30 +85,33 @@ export function FormProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(formReducer, initialState);
 
   const nextStep = () => {
-    dispatch({ type: 'SET_STEP', payload: state.currentStep + 1 });
+    dispatch({ type: "SET_STEP", payload: state.currentStep + 1 });
   };
 
   const prevStep = () => {
-    dispatch({ type: 'SET_STEP', payload: Math.max(0, state.currentStep - 1) });
+    dispatch({ type: "SET_STEP", payload: Math.max(0, state.currentStep - 1) });
   };
 
   const updateFormData = (data: Partial<ResumeFormData>) => {
-    dispatch({ type: 'UPDATE_FORM_DATA', payload: data });
+    console.log("Updating form data:", data);
+    dispatch({ type: "UPDATE_FORM_DATA", payload: data });
   };
 
   const setErrors = (errors: Record<string, string>) => {
-    dispatch({ type: 'SET_ERRORS', payload: errors });
+    dispatch({ type: "SET_ERRORS", payload: errors });
   };
 
   return (
-    <FormContext.Provider value={{
-      state,
-      dispatch,
-      nextStep,
-      prevStep,
-      updateFormData,
-      setErrors,
-    }}>
+    <FormContext.Provider
+      value={{
+        state,
+        dispatch,
+        nextStep,
+        prevStep,
+        updateFormData,
+        setErrors,
+      }}
+    >
       {children}
     </FormContext.Provider>
   );
@@ -112,7 +120,7 @@ export function FormProvider({ children }: { children: ReactNode }) {
 export function useFormContext() {
   const context = useContext(FormContext);
   if (!context) {
-    throw new Error('useFormContext must be used within FormProvider');
+    throw new Error("useFormContext must be used within FormProvider");
   }
   return context;
 }

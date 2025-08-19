@@ -19,6 +19,9 @@ const ResumePage = () => {
     userContext?.clearUser();
     navigate("/");
   };
+  const goToCreateResumePage = () => {
+    navigate("/resumeCreate");
+  };
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
       <div className="z-20 header">
@@ -91,7 +94,9 @@ const ResumePage = () => {
           <div className="rounded-full gradient-button flex items-center justify-center px-2">
             <CirclePlus color="white" size={20} />
           </div>
-          <div className="font-bold text-lg">Create New Resume</div>
+          <div onClick={goToCreateResumePage} className="font-bold text-lg">
+            Create New Resume
+          </div>
           <div className="text-sm text-gray-500">
             Start building your cover letter
           </div>

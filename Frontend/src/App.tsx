@@ -24,8 +24,15 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<IndexPage />} />
-      <Route path="/resumeDetail/" element={<ResumePage />} />
-      <Route path="/resumeCreate/" element={<FormProvider><StepForm /></FormProvider>} />
+      <Route path="/resumeDetail/:id" element={<ResumePage />} />
+      <Route
+        path="/resumeCreate/"
+        element={
+          <FormProvider>
+            <StepForm />
+          </FormProvider>
+        }
+      />
     </Routes>
   );
 };
@@ -36,7 +43,7 @@ const App = () => {
       <AppRoutes />
       <ToastProvider />
     </UserProvider>
-  )
-}
+  );
+};
 
 export default App;

@@ -1,20 +1,30 @@
-import React from 'react';
-import { useFormContext } from '../../../context/FormContext';
-import Input from '../../Input';
+import React from "react";
+import { useFormContext } from "../../../context/FormContext";
+import Input from "../../Input";
 
 export default function ProfileStep() {
   const { state, updateFormData } = useFormContext();
   const { formData } = state;
 
   const handleInputChange = (field: string, value: string) => {
-    if (field.includes('.')) {
-      const [parent, child] = field.split('.');
-      updateFormData({
-        [parent]: {
-          //...formData[parent as keyof typeof formData],
-          [child]: value
-        }
-      });
+    if (field.includes(".")) {
+      const [parent, child] = field.split(".");
+      const parentKey = parent as keyof typeof formData;
+      const parentData = formData[parentKey];
+      // 类型检查确保是普通对象
+      if (
+        parentData &&
+        typeof parentData === "object" &&
+        !Array.isArray(parentData) &&
+        parentData !== null
+      ) {
+        updateFormData({
+          [parentKey]: {
+            ...parentData,
+            [child]: value,
+          },
+        });
+      }
     } else {
       updateFormData({ [field]: value });
     }
@@ -29,33 +39,37 @@ export default function ProfileStep() {
 
       {/* 简历标题 */}
       <div>
-        <Input 
-          type="text" 
-          value={formData.title} 
-          onChange={(e) => handleInputChange('title', e.target.value)} 
-          placeholder="例如：前端开发工程师简历" 
+        <Input
+          type="text"
+          value={formData.title}
+          onChange={(e) => handleInputChange("title", e.target.value)}
+          placeholder="例如：前端开发工程师简历"
           label="简历标题 *"
         />
       </div>
 
       {/* 姓名 */}
       <div>
-        <Input 
-          type="text" 
-          value={formData.profileInfo.fullName} 
-          onChange={(e) => handleInputChange('profileInfo.fullName', e.target.value)} 
-          placeholder="请输入您的姓名" 
+        <Input
+          type="text"
+          value={formData.profileInfo.fullName}
+          onChange={(e) =>
+            handleInputChange("profileInfo.fullName", e.target.value)
+          }
+          placeholder="请输入您的姓名"
           label="姓名 *"
         />
       </div>
 
       {/* 职位 */}
       <div>
-        <Input 
-          type="text" 
-          value={formData.profileInfo.designation} 
-          onChange={(e) => handleInputChange('profileInfo.designation', e.target.value)} 
-          placeholder="例如：前端开发工程师" 
+        <Input
+          type="text"
+          value={formData.profileInfo.designation}
+          onChange={(e) =>
+            handleInputChange("profileInfo.designation", e.target.value)
+          }
+          placeholder="例如：前端开发工程师"
           label="目标职位 *"
         />
       </div>
@@ -67,7 +81,9 @@ export default function ProfileStep() {
         </label>
         <textarea
           value={formData.profileInfo.summary}
-          onChange={(e) => handleInputChange('profileInfo.summary', e.target.value)}
+          onChange={(e) =>
+            handleInputChange("profileInfo.summary", e.target.value)
+          }
           placeholder="简要介绍您的专业背景、技能特长和职业目标..."
           rows={4}
           className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none placeholder:text-gray-400 placeholder:font-light"
@@ -82,9 +98,9 @@ export default function ProfileStep() {
         </label>
         <div className="flex items-center space-x-4">
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
-            {formData.profileInfo.profilePreviewUrl ? (
+            {formData.profileInfo.preivewUrl ? (
               <img
-                src={formData.profileInfo.profilePreviewUrl}
+                src={formData.profileInfo.preivewUrl}
                 alt="头像预览"
                 className="w-full h-full object-cover"
               />

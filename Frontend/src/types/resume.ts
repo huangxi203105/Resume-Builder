@@ -4,7 +4,7 @@ export interface ResumeFormData {
     fullName: string;
     designation: string;
     summary: string;
-    profilePreviewUrl?: string;
+    previewUrl?: string;
   };
   contactInfo: {
     email: string;
@@ -15,7 +15,7 @@ export interface ResumeFormData {
     website: string;
   };
   workExperience: Array<{
-    companyName: string;
+    company: string;
     role: string;
     startDate: string;
     endDate: string;
