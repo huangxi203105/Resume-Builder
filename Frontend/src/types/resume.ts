@@ -1,5 +1,6 @@
 export interface ResumeFormData {
   title: string;
+  _id?:number
   profileInfo: {
     fullName: string;
     designation: string;
@@ -51,6 +52,8 @@ export interface ResumeFormData {
     progress: number;
   }>;
   interests: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface FormStep {

@@ -6,9 +6,9 @@ const API_PATH = {
   GET_USER: "/api/auth/profile",
   CREATE_RESUME: "/api/resume",
   GET_ALL: "/api/resume",
-  GET_BY_ID:(id:any)=> `/api/resume${id}`,
-  UPDATE: (id: any) =>`/api/resume/${id}`,
-  DELETE: (id: any) =>`/api/resume/${id}`,
+  GET_BY_ID:(id:any)=> `/api/resume/${id}/getResumeById`,
+  UPDATE: (id: any) =>`/api/resume/${id}/update`,
+  DELETE: (id: any) =>`/api/resume/${id}/delete`,
   UPLOAD_IMAGES: (id: any) => `/api/resume/${id}/upload-images`,
   UPLOAD_IMAGES_ALL: `/api/auth/upload-images`,
 }

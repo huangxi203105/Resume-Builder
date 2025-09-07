@@ -68,7 +68,6 @@ export const createResume = async (req, res) => {
       ],
       interests: [''],
     };
-    console.log(req.user)
     const newResume = await Resume.create({
       userId: req.user._id,
       title: title || "My Resume",
@@ -107,16 +106,17 @@ export const getResumeById = async (req, res) => {
 
 export const updateResume = async (req, res) => {
   try {
+    console.log(req.params)
     const resume = await Resume.findOne({
       _id: req.params.id,
-      userId: req.user._id,
+      //userId: req.user._id,
     })
     if(!resume){
       return rspHandler(res, null, 404, "Resume not found");
     }
     Object.assign(resume, req.body);
     const updatedResume = await resume.save();
-    respHandler(res, updatedResume, 200, "Resume updated successfully");
+    rspHandler(res, updatedResume, 200, "Resume updated successfully");
   } catch (error) {
     console.error("Error updating resume:", error);
     rspHandler(res, null, 500, "简历更新失败");

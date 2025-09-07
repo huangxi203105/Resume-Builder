@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext, type ReactNode } from "react";
-import http from "../utils/http";
+import request from "../utils/request";
 import API_PATH from "../utils/apiPath";
 
 interface UserProviderProps {
@@ -36,8 +36,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
     const getUser = async () => {
       try {
-        const res = await http.get(API_PATH.GET_USER, {})
-        console.log(res)
+        const res = await request.get(API_PATH.GET_USER, {})
         setUser(res.data);
         setLoading(false);
       } catch (err) {

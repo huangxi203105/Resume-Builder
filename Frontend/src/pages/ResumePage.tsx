@@ -1,27 +1,39 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import http from "../utils/http";
+import request from "../utils/request";
 import { FileText, Clock, CirclePlus } from "lucide-react";
 import API_PATH from "../utils/apiPath";
 import { UserContext } from "../context/UserContext";
 import { LayoutDashboard } from "lucide-react";
 import Toast from "../utils/toast";
-import StepForm from "../components/StepForm/StepForm";
+import type { ResumeFormData } from "../types/resume";
+
 const ResumePage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const [resume, setResume] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const userContext = useContext(UserContext);
-
+  const [resumes, setResumes] = useState<ResumeFormData[]>([]);
   const logout = () => {
     userContext?.clearUser();
     navigate("/");
   };
-  const goToCreateResumePage = () => {
-    navigate("/resumeCreate");
+  const goToCreateResumePage = (id: number) => {
+    if (id && id !== 0) {
+      navigate(`/resumeDetail/${id}`);
+    }
+    else {
+      navigate(`/resumeDetail`);
+    }
   };
+  const getResumes = async () => {
+    const res = await request.get(API_PATH.GET_ALL);
+    setResumes(res.data);
+  };
+  useEffect(() => {
+    getResumes();
+  }, []);
   return (
     <div className="bg-[#f8fbfd] min-h-screen w-[100vw]">
       <div className="z-20 header">
@@ -90,27 +102,28 @@ const ResumePage = () => {
       </div> */}
       <div className="px-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* 新增按鈕 */}
-        <div className="bg-violet-50 border-dashed border-2 border-violet-200 h-60 flex flex-col justify-center items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div onClick={() => goToCreateResumePage(0)} className="bg-violet-50 border-dashed border-2 border-violet-200 h-60 flex flex-col justify-center items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
           <div className="rounded-full gradient-button flex items-center justify-center px-2">
             <CirclePlus color="white" size={20} />
           </div>
-          <div onClick={goToCreateResumePage} className="font-bold text-lg">
+          <div className="font-bold text-lg">
             Create New Resume
           </div>
           <div className="text-sm text-gray-500">
             Start building your cover letter
           </div>
         </div>
-        <div className="h-60 flex flex-col gap-2 rounded-lg bg-red-200 hover:text-violet-600 shadow-lg transition-all duration-300 cursor-pointer">
+        {resumes.map((resume) => (
+        <div onClick={() => goToCreateResumePage(resume._id!)} className="h-60 flex flex-col gap-2 rounded-lg bg-red-200 hover:text-violet-600 shadow-lg transition-all duration-300 cursor-pointer">
           <div className="bg-red-300 rounded-lg h-35"></div>
           <div className="px-4 flex flex-col">
-            <div className="text-sm font-bold">title</div>
+            <div className="text-sm font-bold">{resume.title}</div>
             <div className="flex items-center text-xs text-gray-500 gap-2 mt-1">
               <span>
                 <Clock color="gray" size={14} />
-              </span>
-              <span>create at 2023-01-01</span>
-              <span>update at 2023-01-01</span>
+                </span>
+              <span>{resume.createdAt ? resume.createdAt.split('T')[0] : 'N/A'}</span>
+              <span>update at {resume.updatedAt ? resume.updatedAt.split('T')[0] : 'N/A'}</span>
             </div>
             <div className="mt-3">
               {/* 进度条 */}
@@ -129,6 +142,7 @@ const ResumePage = () => {
             </div>
           </div>
         </div>
+        ))}
       </div>
     </div>
   );

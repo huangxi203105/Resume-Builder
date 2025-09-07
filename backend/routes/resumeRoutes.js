@@ -5,8 +5,8 @@ import { uploadResumeImages } from '../controllers/uploadImage.js';
 const resumeRouter = express.Router();
 resumeRouter.post('/', protect, createResume)
 resumeRouter.get('/', protect, getUserResumes)
-resumeRouter.get('/:id', protect, getResumeById)
-resumeRouter.put('/:id', protect, updateResume)
-resumeRouter.put('/:id/upload-images ', protect, uploadResumeImages)
-resumeRouter.delete('/:id', protect, deleteResume) 
+resumeRouter.get('/:id/getResumeById', protect, getResumeById)
+resumeRouter.post('/:id/update', protect, updateResume)
+resumeRouter.post('/:id/upload-images ', protect, uploadResumeImages)
+resumeRouter.delete('/:id/delete', protect, deleteResume) 
 export default resumeRouter;

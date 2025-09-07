@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Input from "./Input"
-import http from "../utils/http"
+import request from "../utils/request"
 import API_PATH from "../utils/apiPath"
 import Toast from "../utils/toast"
 interface RegisterFormProps {
@@ -16,7 +16,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
 
   const register = async () => {
     try {
-      const res = await http.post(API_PATH.REGISTER, { name: fullName , email, password })
+      const res = await request.post(API_PATH.REGISTER, { name: fullName , email, password })
       localStorage.setItem('token', res.data.token)
       Toast.success("注册成功！");
       props.ref.current.switchView('login')

@@ -1,9 +1,9 @@
-// src/utils/http.js
+// src/utils/request.js
 import axios from 'axios';
 import { BASE_URL } from './apiPath';
 import { navigateTo } from './navigation';
 // 创建 Axios 实例
-const http = axios.create({
+const request = axios.create({
   baseURL: BASE_URL, // 替换为您的 API 基础 URL
   timeout: 10000, // 请求超时时间
   headers: {
@@ -12,7 +12,7 @@ const http = axios.create({
 });
 
 // 请求拦截器
-http.interceptors.request.use(
+request.interceptors.request.use(
   (config) => {
     // 从 localStorage 获取 token
     const token = localStorage.getItem('token');
@@ -31,7 +31,7 @@ http.interceptors.request.use(
 );
 
 // 响应拦截器
-http.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
     // 统一处理响应数据
     if (response.status === 200) {
@@ -78,8 +78,8 @@ http.interceptors.response.use(
 
 // 封装常用请求方法
 export default {
-  get: (url: any, params?: any, config?: any) => http.get(url, { params, ...config }),
-  post: (url: any, data?: any, config?: any) => http.post(url, data, config),
+  get: (url: any, params?: any, config?: any) => request.get(url, { params, ...config }),
+  post: (url: any, data?: any, config?: any) => request.post(url, data, config),
   // put: (url: any, data: any, config: any) => http.put(url, data, config),
   // delete: (url: any ,config: any) => http.delete(url, config),
 
