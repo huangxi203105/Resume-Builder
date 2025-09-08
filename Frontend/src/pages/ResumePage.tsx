@@ -19,11 +19,12 @@ const ResumePage = () => {
     userContext?.clearUser();
     navigate("/");
   };
-  const goToCreateResumePage = (id: number) => {
-    if (id && id !== 0) {
+  const goToCreateResumePage = (id?: number) => {
+    if (id) {
       navigate(`/resumeDetail/${id}`);
     }
     else {
+
       navigate(`/resumeDetail`);
     }
   };
@@ -71,12 +72,12 @@ const ResumePage = () => {
       <div className="w-full px-80 pt-[100px] pb-10">
         <div className="flex justify-between items-center">
           <div className="font-sans flex flex-col gap-1">
-            <text className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">
               My Resume
-            </text>
-            <text className="font-mono text-gray-500 text-sm ">
+            </div>
+            <div className="font-mono text-gray-500 text-sm ">
               start building your professional resume
-            </text>
+            </div>
           </div>
           <div>
             <button className="cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-4 py-2 rounded-[10px] hover:scale-105 transition-all duration-300">
@@ -102,7 +103,7 @@ const ResumePage = () => {
       </div> */}
       <div className="px-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* 新增按鈕 */}
-        <div onClick={() => goToCreateResumePage(0)} className="bg-violet-50 border-dashed border-2 border-violet-200 h-60 flex flex-col justify-center items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div onClick={() => goToCreateResumePage()} className="bg-violet-50 border-dashed border-2 border-violet-200 h-60 flex flex-col justify-center items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
           <div className="rounded-full gradient-button flex items-center justify-center px-2">
             <CirclePlus color="white" size={20} />
           </div>
@@ -114,34 +115,34 @@ const ResumePage = () => {
           </div>
         </div>
         {resumes.map((resume) => (
-        <div onClick={() => goToCreateResumePage(resume._id!)} className="h-60 flex flex-col gap-2 rounded-lg bg-red-200 hover:text-violet-600 shadow-lg transition-all duration-300 cursor-pointer">
-          <div className="bg-red-300 rounded-lg h-35"></div>
-          <div className="px-4 flex flex-col">
-            <div className="text-sm font-bold">{resume.title}</div>
-            <div className="flex items-center text-xs text-gray-500 gap-2 mt-1">
-              <span>
-                <Clock color="gray" size={14} />
+          <div onClick={() => goToCreateResumePage(resume._id!)} className="h-60 flex flex-col gap-2 rounded-lg bg-red-200 hover:text-violet-600 shadow-lg transition-all duration-300 cursor-pointer">
+            <div className="bg-red-300 rounded-lg h-35"></div>
+            <div className="px-4 flex flex-col">
+              <div className="text-sm font-bold">{resume.title}</div>
+              <div className="flex items-center text-xs text-gray-500 gap-2 mt-1">
+                <span>
+                  <Clock color="gray" size={14} />
                 </span>
-              <span>{resume.createdAt ? resume.createdAt.split('T')[0] : 'N/A'}</span>
-              <span>update at {resume.updatedAt ? resume.updatedAt.split('T')[0] : 'N/A'}</span>
-            </div>
-            <div className="mt-3">
-              {/* 进度条 */}
-              <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div
-                  className="bg-violet-600 h-2.5 rounded-full"
-                  style={{ width: "50%" }}
-                ></div>
+                <span>{resume.createdAt ? resume.createdAt.split('T')[0] : 'N/A'}</span>
+                <span>update at {resume.updatedAt ? resume.updatedAt.split('T')[0] : 'N/A'}</span>
               </div>
-            </div>
-            <div className="flex justify-between items-center mt-2">
-              <div className="text-xs text-gray-500">ready to go!</div>
-              <div className="text-xs font-bold text-gray-500">
-                50% Completed
+              <div className="mt-3">
+                {/* 进度条 */}
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                  <div
+                    className="bg-violet-600 h-2.5 rounded-full"
+                    style={{ width: "50%" }}
+                  ></div>
+                </div>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <div className="text-xs text-gray-500">ready to go!</div>
+                <div className="text-xs font-bold text-gray-500">
+                  50% Completed
+                </div>
               </div>
             </div>
           </div>
-        </div>
         ))}
       </div>
     </div>

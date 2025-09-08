@@ -39,14 +39,14 @@ function StepFormContent() {
   useEffect(() => {
     const getResumeById = async () => {
       if (!id) return;
-      
+
       try {
         setLoading(true);
-        const res = await request.get(API_PATH.GET_BY_ID(id));
+        const res: any = await request.get(API_PATH.GET_BY_ID(id));
         const resumeData = res.data;
         setResume(resumeData);
         setIsEditMode(true);
-        
+
         // 更新表单数据
         updateFormData({
           title: resumeData.title || "",
@@ -79,10 +79,9 @@ function StepFormContent() {
     if (isLastStep) {
       try {
         setLoading(true);
-        
+
         if (isEditMode && id) {
           // 编辑模式：更新简历
-          console.log(1233)
           const res = await request.post(API_PATH.UPDATE(id), state.formData);
           Toast.success("简历更新成功！");
           navigate(`/resumeList`);
@@ -145,11 +144,10 @@ function StepFormContent() {
               <button
                 onClick={prevStep}
                 disabled={isFirstStep}
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
-                  isFirstStep
+                className={`px-6 py-3 rounded-xl font-medium transition-all ${isFirstStep
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
+                  }`}
               >
                 上一步
               </button>

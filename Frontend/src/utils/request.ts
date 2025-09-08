@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { BASE_URL } from './apiPath';
 import { navigateTo } from './navigation';
+import type { Res } from '../types/res';
 // 创建 Axios 实例
 const request = axios.create({
   baseURL: BASE_URL, // 替换为您的 API 基础 URL
@@ -34,10 +35,10 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => {
     // 统一处理响应数据
-    if (response.status === 200) {
+    if (response.status === 200 && response.data.code === 200) {
       return Promise.resolve(response.data);
     }
-
+    console.log(response);
     return response;
   },
   (error) => {

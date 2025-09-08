@@ -123,6 +123,12 @@ const IndexPage = () => {
                   View Templates
                 </span>
               </button>
+              <button
+                onClick={() => navigate('/profile-photo-test')}
+                className="w-[200px] border-solid border-2 border-green-600 cursor-pointer py-4 px-6 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-green-200"
+              >
+                <span className="text-green-600 font-semibold">Test Photo Upload</span>
+              </button>
             </div>
             <div className="flex gap-4">
               {statsMap.map((stat, index) => (
