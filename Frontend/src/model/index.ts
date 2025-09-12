@@ -38,3 +38,10 @@ export const cardsMap: CardProps[] = [
     bgColor: 'bg-[#fef6ee]',
   },
 ]
+
+export const Proficiency = [
+  { label: '了解', value: 0 },
+  { label: '掌握', value: 1 },
+  { label: '熟练', value: 2 },
+  { label: '精通', value: 3 },
+]

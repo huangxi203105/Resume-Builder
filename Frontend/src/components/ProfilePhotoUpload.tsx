@@ -31,6 +31,7 @@ const ProfilePhotoUpload: React.FC<ProfilePhotoUploadProps> = ({
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      console.log('选择的文件:', file);
       uploadPhoto(file);
     }
   };
@@ -152,13 +153,12 @@ const ProfilePhotoUpload: React.FC<ProfilePhotoUploadProps> = ({
             </div>
           </div>
         )}
-
         {/* 操作按钮 */}
         {!uploading && (
           <div className="absolute -bottom-2 -right-2 flex space-x-2">
             <button
               onClick={triggerFileSelect}
-              className="w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+              className="w-10 h-10 bg-primary cursor-pointer text-white rounded-full flex items-center justify-center shadow-lg transition-colors"
               title="上传照片"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

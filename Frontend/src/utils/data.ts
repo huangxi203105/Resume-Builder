@@ -56,7 +56,7 @@ export const DUMMY_RESUME_DATA = {
   workExperience: [
     {
       role: "Senior Software Engineer",
-      company: "TechSolutions Inc.",
+      companyName: "TechSolutions Inc.",
       location: "San Francisco, CA",
       startDate: "2020-06-01",
       endDate: "2023-12-31",
@@ -64,7 +64,7 @@ export const DUMMY_RESUME_DATA = {
     },
     {
       role: "Software Developer",
-      company: "InnovateSoft",
+      companyName: "InnovateSoft",
       location: "San Jose, CA",
       startDate: "2018-07-01",
       endDate: "2020-05-31",

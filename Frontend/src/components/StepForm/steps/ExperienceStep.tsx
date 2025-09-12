@@ -8,7 +8,7 @@ export default function ExperienceStep() {
 
   const addExperience = () => {
     const newExperience = {
-      company: "",
+      companyName: "",
       role: "",
       startDate: "",
       endDate: "",
@@ -59,9 +59,9 @@ export default function ExperienceStep() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <Input
                 type="text"
-                value={experience.company}
+                value={experience.companyName}
                 onChange={(e) =>
-                  updateExperience(index, "company", e.target.value)
+                  updateExperience(index, "companyName", e.target.value)
                 }
                 placeholder="公司名称"
                 label="公司名称 *"

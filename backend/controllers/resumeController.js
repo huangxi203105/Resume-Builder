@@ -3,7 +3,7 @@ import { rspHandler } from '../utils/utils.js';
 import fs from 'fs';
 import path from 'path';
 export const createResume = async (req, res) => {
-  try{
+  try {
     const { title, content } = req.body;
 
     const defaultResumeData = {
@@ -24,7 +24,7 @@ export const createResume = async (req, res) => {
       },
       workExperience: [
         {
-          company: '',
+          companyName: '',
           role: '',
           startDate: '',
           endDate: '',
@@ -75,7 +75,7 @@ export const createResume = async (req, res) => {
       ...req.body,
     });
     rspHandler(res, newResume, 201, "Resume created successfully");
-  }catch (error) {
+  } catch (error) {
     console.error("Error creating resume:", error);
     rspHandler(res, null, 500, "简历创建失败");
   }
@@ -111,7 +111,7 @@ export const updateResume = async (req, res) => {
       _id: req.params.id,
       //userId: req.user._id,
     })
-    if(!resume){
+    if (!resume) {
       return rspHandler(res, null, 404, "Resume not found");
     }
     Object.assign(resume, req.body);
@@ -129,20 +129,20 @@ export const deleteResume = async (req, res) => {
       _id: req.params.id,
       userId: req.user._id,
     })
-    if(!resume){
+    if (!resume) {
       return rspHandler(res, null, 404, "Resume not found");
     }
     const uploadsFolder = path.join(process.cwd(), 'uploads');
-    
-    if(resume.thumbnailLink){
-      const oldThumbnailPath = path.join(uploadsFolder,  path.basename(resume.thumbnailLink));
+
+    if (resume.thumbnailLink) {
+      const oldThumbnailPath = path.join(uploadsFolder, path.basename(resume.thumbnailLink));
       if (fs.existsSync(oldThumbnailPath)) {
         fs.unlinkSync(oldThumbnailPath);
       }
     }
-    
-    if(resume.profileInfo.profilePreviewUrl){
-      const oldProfilePreviewPath = path.join(uploadsFolder,  path.basename(resume.profileInfo.profilePreviewUrl));
+
+    if (resume.profileInfo.profilePreviewUrl) {
+      const oldProfilePreviewPath = path.join(uploadsFolder, path.basename(resume.profileInfo.profilePreviewUrl));
       if (fs.existsSync(oldProfilePreviewPath)) {
         fs.unlinkSync(oldProfilePreviewPath);
       }
@@ -151,11 +151,11 @@ export const deleteResume = async (req, res) => {
       _id: req.params.id,
       userId: req.user._id,
     });
-    if(!deletedResume){
-      return rspHandler(res, null, 404, "Resume not found"); 
+    if (!deletedResume) {
+      return rspHandler(res, null, 404, "Resume not found");
     }
-    
-    rspHandler(res,null, 200, "Resume deleted successfully");
+
+    rspHandler(res, null, 200, "Resume deleted successfully");
   } catch (error) {
     console.error("Error deleting resume:", error);
     rspHandler(res, null, 500, "简历删除失败");

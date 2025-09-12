@@ -25,6 +25,7 @@ interface FormContextType {
   dispatch: React.Dispatch<FormAction>;
   nextStep: () => void;
   prevStep: () => void;
+  toTargetStep: (index: number) => void;
   updateFormData: (data: Partial<ResumeFormData>) => void;
   setErrors: (errors: Record<string, string>) => void;
 }
@@ -87,7 +88,9 @@ export function FormProvider({ children }: { children: ReactNode }) {
   const nextStep = () => {
     dispatch({ type: "SET_STEP", payload: state.currentStep + 1 });
   };
-
+  const toTargetStep = (index: number) =>{
+    dispatch({ type: "SET_STEP", payload: index });
+  }
   const prevStep = () => {
     dispatch({ type: "SET_STEP", payload: Math.max(0, state.currentStep - 1) });
   };
@@ -108,6 +111,7 @@ export function FormProvider({ children }: { children: ReactNode }) {
         dispatch,
         nextStep,
         prevStep,
+        toTargetStep,
         updateFormData,
         setErrors,
       }}

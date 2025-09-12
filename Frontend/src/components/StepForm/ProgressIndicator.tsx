@@ -13,7 +13,7 @@ const steps = [
 ];
 
 export default function ProgressIndicator() {
-  const { state } = useFormContext();
+  const { state, toTargetStep } = useFormContext();
   const { currentStep } = state;
   const [showModal, setShowModal] = useState(false);
   const previewResume = () => {
@@ -38,6 +38,7 @@ export default function ProgressIndicator() {
 
             {/* 步骤圆圈 */}
             <div
+              onClick={()=>toTargetStep(index)}
               className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold relative z-10 flex-shrink-0 ${currentStep > index
                 ? 'bg-green-300 text-white'
                 : currentStep === index

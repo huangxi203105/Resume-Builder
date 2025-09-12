@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
+import { Proficiency } from '../../../model';
 import Input from '../../Input';
-
 export default function SkillsStep() {
   const { state, updateFormData } = useFormContext();
   const { formData } = state;
@@ -9,7 +9,7 @@ export default function SkillsStep() {
   const addSkill = () => {
     const newSkill = {
       name: '',
-      progress: 50,
+      progress: 0,
     };
     updateFormData({
       skills: [...formData.skills, newSkill]
@@ -27,11 +27,10 @@ export default function SkillsStep() {
     );
     updateFormData({ skills: updatedSkills });
   };
-
   const addLanguage = () => {
     const newLanguage = {
       name: '',
-      progress: 50,
+      progress: 0,
     };
     updateFormData({
       languages: [...formData.languages, newLanguage]
@@ -102,17 +101,26 @@ export default function SkillsStep() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    熟练度: {skill.progress}%
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    熟练度
                   </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={skill.progress}
-                    onChange={(e) => updateSkill(index, 'progress', parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                  />
+                  <div className="flex flex-wrap gap-3">
+                    {Proficiency.map((level) => {
+                      return (
+                        <label key={level.label} className="flex items-center cursor-pointer">
+                          <input
+                            type="radio"
+                            name={`skill-${index}-progress`}
+                            value={level.value}
+                            checked={skill.progress === level.value}
+                            onChange={(e) => updateSkill(index, 'progress', parseInt(e.target.value))}
+                            className="mr-2 text-primary focus:ring-primary"
+                          />
+                          <span className="text-sm text-gray-700">{level.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,7 +163,7 @@ export default function SkillsStep() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    熟练度: {language.progress}%
+                    熟练度: {language.progress}
                   </label>
                   <input
                     type="range"
@@ -195,7 +203,7 @@ export default function SkillsStep() {
               />
               <button
                 onClick={() => removeInterest(index)}
-                className="absolute right-2 top-8 text-gray-400 hover:text-red-500 transition-colors"
+                className="absolute right-2 top-5 bottom-2 text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
