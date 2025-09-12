@@ -5,6 +5,7 @@ import { FormProvider, useFormContext } from "./context/FormContext";
 import { setNavigateFunction, clearNavigateFunction } from "./utils/navigation";
 import ToastProvider from "./components/Toast";
 import { LoadingSpinner } from "./components/Loading.tsx"
+import RouteDebugger from "./components/RouteDebugger.tsx";
 // 路由懒加载
 const IndexPage = lazy(() => import("./pages/IndexPage.tsx"));
 const ResumePage = lazy(() => import("./pages/ResumePage.tsx"));
@@ -56,6 +57,8 @@ const App = () => {
     <UserProvider>
       <AppRoutes />
       <ToastProvider />
+      {/* 路由调试器 - 仅在开发环境显示 */}
+      <RouteDebugger position="bottom-right" />
     </UserProvider>
   );
 };

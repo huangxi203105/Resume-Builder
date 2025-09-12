@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
-import { Proficiency } from '../../../model';
+import { Proficiency, Proficiency1 } from '../../../model';
+import { Radio } from '../../../components/Radio/Radio';
 import Input from '../../Input';
 export default function SkillsStep() {
   const { state, updateFormData } = useFormContext();
@@ -104,23 +105,12 @@ export default function SkillsStep() {
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     熟练度
                   </label>
-                  <div className="flex flex-wrap gap-3">
-                    {Proficiency.map((level) => {
-                      return (
-                        <label key={level.label} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name={`skill-${index}-progress`}
-                            value={level.value}
-                            checked={skill.progress === level.value}
-                            onChange={(e) => updateSkill(index, 'progress', parseInt(e.target.value))}
-                            className="mr-2 text-primary focus:ring-primary"
-                          />
-                          <span className="text-sm text-gray-700">{level.label}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
+                  <Radio
+                    options={Proficiency}
+                    value={skill.progress}
+                    onChange={(value) => updateSkill(index, 'progress', value)}
+                    name={`skill-${index}-progress`}
+                  />
                 </div>
               </div>
             </div>
@@ -162,16 +152,14 @@ export default function SkillsStep() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    熟练度: {language.progress}
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    熟练度
                   </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
+                  <Radio
+                    options={Proficiency}
                     value={language.progress}
-                    onChange={(e) => updateLanguage(index, 'progress', parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                    onChange={(value) => updateLanguage(index, 'progress', value)}
+                    name={`language-${index}-progress`}
                   />
                 </div>
               </div>
