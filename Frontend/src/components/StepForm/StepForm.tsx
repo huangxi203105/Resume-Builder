@@ -13,6 +13,7 @@ import API_PATH from "../../utils/apiPath";
 import { useNavigate, useParams } from "react-router-dom";
 import Toast from "../../utils/toast";
 import type { ResumeFormData } from "../../types/resume";
+import { navigateTo } from "../../utils/navigation";
 
 const stepComponents = [
   ProfileStep,
@@ -26,7 +27,6 @@ const stepComponents = [
 function StepFormContent() {
   const { state, nextStep, prevStep, updateFormData } = useFormContext();
   const { currentStep } = state;
-  const navigate = useNavigate();
   const { id } = useParams();
   const CurrentStepComponent = stepComponents[currentStep];
   const isLastStep = currentStep === stepComponents.length - 1;
@@ -84,12 +84,12 @@ function StepFormContent() {
           // 编辑模式：更新简历
           const res = await request.post(API_PATH.UPDATE(id), state.formData);
           Toast.success("简历更新成功！");
-          navigate(`/resumeList`);
+          navigateTo(`/resumeList`);
         } else {
           // 创建模式：新建简历
           const res = await request.post(API_PATH.CREATE_RESUME, state.formData);
           Toast.success("简历创建成功！");
-          navigate(`/resumeList`);
+          navigateTo(`/resumeList`);
         }
       } catch (err: any) {
         const errorMsg = err.data?.msg || "操作失败，请重试";

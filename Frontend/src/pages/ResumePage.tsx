@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import request from "../utils/request";
-import { FileText, Clock, CirclePlus } from "lucide-react";
+import { Clock, CirclePlus } from "lucide-react";
 import API_PATH from "../utils/apiPath";
 import { UserContext } from "../context/UserContext";
 import { LayoutDashboard } from "lucide-react";
 import Toast from "../utils/toast";
 import type { ResumeFormData } from "../types/resume";
+import { navigateTo } from "../utils/navigation";
 
 const ResumePage = () => {
-  const navigate = useNavigate();
   const [resume, setResume] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,15 +16,15 @@ const ResumePage = () => {
   const [resumes, setResumes] = useState<ResumeFormData[]>([]);
   const logout = () => {
     userContext?.clearUser();
-    navigate("/");
+    navigateTo("/");
   };
   const goToCreateResumePage = (id?: number) => {
     if (id) {
-      navigate(`/resumeDetail/${id}`);
+      navigateTo(`/resumeDetail/${id}`);
     }
     else {
 
-      navigate(`/resumeDetail`);
+      navigateTo(`/resumeDetail`);
     }
   };
   const getResumes = async () => {
@@ -86,21 +85,6 @@ const ResumePage = () => {
           </div>
         </div>
       </div>
-      {/* 待完善 */}
-      {/* <div className="flex items-center justify-center flex-col gap-2">
-        <div className="bg-violet-600 opacity-40 p-2 rounded-full w-[40px] h-[40px] flex items-center justify-center">
-          <FileText color="white" size={30} />
-        </div>
-        <div className="text-lg font-bold">No resume Yet</div>
-        <div className="text-sm text-gray-500 text-center w-[300px]">
-          You have not created any resume yet. Start by clicking the "Create
-          Now" button.
-        </div>
-
-        <button className="gradient-button flex items-center justify-center gap-2">
-          Create your first resume <FileText color="white" size={30} />
-        </button>
-      </div> */}
       <div className="px-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* 新增按鈕 */}
         <div onClick={() => goToCreateResumePage()} className="bg-violet-50 border-dashed border-2 border-violet-200 h-60 flex flex-col justify-center items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">

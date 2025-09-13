@@ -7,6 +7,7 @@ import { statsMap, cardsMap } from "../model/index.ts";
 import Modal from "../components/Modal";
 import Card from "../components/Card";
 import { UserContext } from "../context/UserContext";
+import { navigateTo } from "../utils/navigation.ts";
 AOS.init({
   offset: 120, // 触发距离（像素）
   delay: 100, // 延迟（毫秒）
@@ -16,7 +17,6 @@ AOS.init({
   mirror: true, // 滚动回来时是否反向播放
 });
 const IndexPage = () => {
-  const navigate = useNavigate();
   const modalRef: any = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userContext = useContext(UserContext);
@@ -35,7 +35,7 @@ const IndexPage = () => {
 
   const ToResumePage = () => {
     if (userContext?.user) {
-      navigate("/resumeList");
+      navigateTo("/resumeList");
     } else {
       showModal();
     }
@@ -124,7 +124,7 @@ const IndexPage = () => {
                 </span>
               </button>
               <button
-                onClick={() => navigate('/profile-photo-test')}
+                onClick={() => navigateTo('/profile-photo-test')}
                 className="w-[200px] border-solid border-2 border-green-600 cursor-pointer py-4 px-6 rounded-[15px] shadow-md overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-green-200"
               >
                 <span className="text-green-600 font-semibold">Test Photo Upload</span>

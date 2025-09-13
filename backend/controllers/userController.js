@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { rspHandler } from "../utils/utils.js";
 //创建TOKEN JWT
-const createToken = (userId) =>{
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET,{ expiresIn: "7d"});
+const createToken = (userId, expiresIn = "7d") => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn });
 }
 
 export const registerUser = async (req, res) => {
@@ -17,12 +17,12 @@ export const registerUser = async (req, res) => {
       rspHandler(res, null, 400, "User already exists");
       return;
     }
-    if(password.length < 6){
+    if (password.length < 6) {
       rspHandler(res, null, 400, "Password must be at least 6 characters long");
       return;
     }
 
-    const salt =  await bcrypt.genSalt(); //生成盐
+    const salt = await bcrypt.genSalt(); //生成盐
     const hashedPassword = await bcrypt.hash(password, salt); //哈希密码
 
     // Create a new user
@@ -45,7 +45,7 @@ export const registerUser = async (req, res) => {
   }
 };
 export const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, rememberMe } = req.body;
 
   try {
     // Check if user exists
@@ -62,11 +62,17 @@ export const loginUser = async (req, res) => {
       return;
     }
 
-    rspHandler(res, { 
+    // 根据rememberMe设置不同的过期时间
+    const expiresIn = rememberMe ? "30d" : "1d"; // 记住我：30天，否则：1天
+    const token = createToken(user._id, expiresIn);
+
+    rspHandler(res, {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token: createToken(user._id),
+      token: token,
+      expiresIn: expiresIn,
+      expiresAt: new Date(Date.now() + (rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000)).toISOString()
     }, 200, "User logged in successfully");
 
   } catch (error) {

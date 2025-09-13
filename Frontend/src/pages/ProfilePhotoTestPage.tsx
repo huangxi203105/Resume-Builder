@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ProfilePhotoUpload from '../components/ProfilePhotoUpload';
 import request from '../utils/request';
 import API_PATH from '../utils/apiPath';
+import { navigateTo } from '../utils/navigation';
 
 interface UploadConfig {
   cosAvailable: boolean;
@@ -12,7 +13,6 @@ interface UploadConfig {
 }
 
 const ProfilePhotoTestPage: React.FC = () => {
-  const navigate = useNavigate();
   const [currentPhoto, setCurrentPhoto] = useState<string>('');
   const [uploadConfig, setUploadConfig] = useState<UploadConfig | null>(null);
   const [loading, setLoading] = useState(true);
@@ -43,9 +43,9 @@ const ProfilePhotoTestPage: React.FC = () => {
     console.log('照片已删除');
   };
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  // const goBack = () => {
+  //   navigateTo(-1);
+  // };
 
   if (loading) {
     return (

@@ -6,7 +6,7 @@ export const protect = async (req, res, next) => {
     let token = req.headers.authorization
     console.log('Token:', token);
     if (!token || !token.startsWith('Bearer ')) {
-      return rspHandler(res, 401, 'Unauthorized');
+      return rspHandler(res,null,401, 'Unauthorized');
     }
     token = token.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -15,6 +15,6 @@ export const protect = async (req, res, next) => {
     console.log('User:', req.user);
     next();
   } catch (error) {
-    return rspHandler(res, 401, 'Unauthorized');
+    return rspHandler(res, null, 401, 'Unauthorized');
   }
 }

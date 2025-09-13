@@ -9,7 +9,6 @@ interface RegisterFormProps {
   ref: any
 }
 export const RegisterForm = (props: RegisterFormProps) => {
-  const navigate = useNavigate();
   const [fullName, setFullName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext, type ReactNode } from "react";
 import request from "../utils/request";
 import API_PATH from "../utils/apiPath";
+import authManager from "../utils/authManager";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -22,18 +23,21 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const clearUser = () => {
     setUser(null);
     setLoading(false);
-    localStorage.removeItem('token');
+    authManager.clearSession();
   };
 
   useEffect(() => {
     if (user) {
       return;
     }
-    const Token = localStorage.getItem('token');
-    if (!Token) {
+
+    // 检查authManager中的会话
+    const session = authManager.getSession();
+    if (!session) {
       setLoading(false);
       return;
     }
+
     const getUser = async () => {
       try {
         const res = await request.get(API_PATH.GET_USER, {})
