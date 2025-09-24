@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ResumeFormData } from '../../types/resume';
+import { Proficiency } from '../../model';
 
 interface TemplateOneProps {
   data: ResumeFormData;
@@ -10,7 +11,6 @@ interface TemplateOneProps {
 const TemplateOne: React.FC<TemplateOneProps> = ({ data, theme = 'themeOne', colorPalette = ['#9358ff', '#6366f1'] }) => {
   const primaryColor = colorPalette[0] || '#9358ff';
   const secondaryColor = colorPalette[1] || '#6366f1';
-
   return (
     <div className="w-full max-w-4xl mx-auto bg-white shadow-lg min-h-[297mm]">
       {/* 头部区域 */}
@@ -86,16 +86,7 @@ const TemplateOne: React.FC<TemplateOneProps> = ({ data, theme = 'themeOne', col
                   <div key={index}>
                     <div className="flex justify-between text-sm mb-1">
                       <span className="font-medium">{skill.name}</span>
-                      <span className="text-gray-500">{skill.progress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className="h-2 rounded-full transition-all"
-                        style={{
-                          width: `${skill.progress}%`,
-                          backgroundColor: primaryColor
-                        }}
-                      />
+                      <span className="text-gray-500">{Proficiency[skill.progress].label}</span>
                     </div>
                   </div>
                 ))}
@@ -111,7 +102,7 @@ const TemplateOne: React.FC<TemplateOneProps> = ({ data, theme = 'themeOne', col
                 {data.languages.map((language, index) => (
                   <div key={index} className="flex justify-between text-sm">
                     <span className="font-medium">{language.name}</span>
-                    <span className="text-gray-500">{language.progress}%</span>
+                    <span className="text-gray-500">{Proficiency[language.progress].label}</span>
                   </div>
                 ))}
               </div>

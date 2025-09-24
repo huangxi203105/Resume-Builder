@@ -53,39 +53,13 @@ export const Proficiency = [
     boxShadow: '0 0 18px rgba(255, 215, 0, 0.5)'
   },
   {
-    value: 3,
+    value: 2,
     label: '熟练',
     background: 'linear-gradient(135deg, #8e51ff, #e0e0e0)',
     boxShadow: '0 0 18px rgba(160, 216, 255, 0.5)'
   },
   {
-    value: 2,
-    label: '精通',
-    background: 'linear-gradient(135deg, #8022fe, #e0e0e0)',
-    boxShadow: '0 0 18px rgba(160, 216, 255, 0.5)'
-  }
-]
-export const Proficiency1 = [
-  {
-    value: 0,
-    label: '了解',
-    background: 'linear-gradient(135deg, #a3b3ff, #e0e0e0)',
-    boxShadow: '0 0 18px rgba(192, 192, 192, 0.5) 0 0 10px rgba(255, 235, 150, 0.4) inset;'
-  },
-  {
-    value: 1,
-    label: '掌握',
-    background: 'linear-gradient(135deg, #a684ff, #e0e0e0)',
-    boxShadow: '0 0 18px rgba(255, 215, 0, 0.5)'
-  },
-  {
     value: 3,
-    label: '熟练',
-    background: 'linear-gradient(135deg, #8e51ff, #e0e0e0)',
-    boxShadow: '0 0 18px rgba(160, 216, 255, 0.5)'
-  },
-  {
-    value: 2,
     label: '精通',
     background: 'linear-gradient(135deg, #8022fe, #e0e0e0)',
     boxShadow: '0 0 18px rgba(160, 216, 255, 0.5)'

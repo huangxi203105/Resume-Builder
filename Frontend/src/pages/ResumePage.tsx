@@ -9,11 +9,9 @@ import type { ResumeFormData } from "../types/resume";
 import { navigateTo } from "../utils/navigation";
 
 const ResumePage = () => {
-  const [resume, setResume] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const userContext = useContext(UserContext);
   const [resumes, setResumes] = useState<ResumeFormData[]>([]);
+  const list = ["contactInfo", "workExperience", "education", "skills", "projects", "achievements", "certifications", "languages", "interests"];
   const logout = () => {
     userContext?.clearUser();
     navigateTo("/");
@@ -23,14 +21,37 @@ const ResumePage = () => {
       navigateTo(`/resumeDetail/${id}`);
     }
     else {
-
       navigateTo(`/resumeDetail`);
     }
   };
   const getResumes = async () => {
     const res = await request.get(API_PATH.GET_ALL);
+    res.data.map((resume: any) => {
+      let progress = 0;
+      list.forEach((item) => {
+        let isCompleted = false;
+        
+        if (Array.isArray(resume[item])) {
+          isCompleted = resume[item].length > 0;
+        } else {
+          isCompleted = Object.values(resume[item]).some(value =>
+            value !== null && value !== undefined && value !== ""
+          );
+        }
+        
+        if (isCompleted) {
+          progress++;
+        }
+      });
+
+      // 计算百分比：完成项数 / 总项数 * 100
+      progress = Math.round((progress / list.length) * 100);
+      resume.progress = progress;
+      return resume;
+    });
     setResumes(res.data);
   };
+
   useEffect(() => {
     getResumes();
   }, []);
@@ -115,14 +136,13 @@ const ResumePage = () => {
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div
                     className="bg-violet-600 h-2.5 rounded-full"
-                    style={{ width: "50%" }}
+                    style={{ width: `${resume.progress}%` }}
                   ></div>
                 </div>
               </div>
               <div className="flex justify-between items-center mt-2">
-                <div className="text-xs text-gray-500">ready to go!</div>
                 <div className="text-xs font-bold text-gray-500">
-                  50% Completed
+                  {resume.progress}% Completed
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import request from '../utils/request';
 import API_PATH from '../utils/apiPath';
+import Modal from './Modal'; // 引入现有的 Modal 组件
 
 interface ProfilePhotoUploadProps {
   currentPhoto?: string;
@@ -25,7 +26,17 @@ const ProfilePhotoUpload: React.FC<ProfilePhotoUploadProps> = ({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [uploadInfo, setUploadInfo] = useState<UploadInfo | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const handleImageClick = () => {
+    if (currentPhoto) {
+      setShowPreview(true);
+    }
+  };
+
+  const closePreview = () => {
+    setShowPreview(false);
+  };
 
   // 处理文件选择
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,7 +143,9 @@ const ProfilePhotoUpload: React.FC<ProfilePhotoUploadProps> = ({
             <img
               src={currentPhoto}
               alt="证件照预览"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-200"
+              onClick={handleImageClick}
+              title="点击查看大图"
             />
           ) : (
             <div className="text-gray-400 text-center">
@@ -208,6 +221,21 @@ const ProfilePhotoUpload: React.FC<ProfilePhotoUploadProps> = ({
           </p>
         )}
       </div>
+
+      <Modal isOpen={showPreview} onClose={closePreview} size="lg">
+        <div className="flex flex-col items-center space-y-4 p-6">
+          <h3 className="text-lg font-medium text-gray-900">证件照预览</h3>
+          {currentPhoto && (
+            <div className="max-w-md max-h-96 shadow-lg">
+              <img
+                src={currentPhoto}
+                alt="证件照大图"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 };

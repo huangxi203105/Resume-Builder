@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../context/FormContext';
-import { Proficiency, Proficiency1 } from '../../../model';
+import { Proficiency } from '../../../model';
 import { Radio } from '../../../components/Radio/Radio';
 import Input from '../../Input';
 export default function SkillsStep() {
@@ -27,6 +27,7 @@ export default function SkillsStep() {
       i === index ? { ...skill, [field]: value } : skill
     );
     updateFormData({ skills: updatedSkills });
+    console.log(formData.skills)  
   };
   const addLanguage = () => {
     const newLanguage = {

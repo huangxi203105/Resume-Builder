@@ -54,6 +54,7 @@ export interface ResumeFormData {
   interests: string[];
   createdAt?: string;
   updatedAt?: string;
+  progress?: number;
 }
 
 export interface FormStep {

@@ -120,3 +120,5 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+.config/
